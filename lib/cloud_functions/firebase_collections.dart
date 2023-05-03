@@ -5,5 +5,4 @@ class FirebaseCollections {
   final CollectionReference users = _databaseRef.collection('users');
   final CollectionReference organizations = _databaseRef.collection('organizations');
   final CollectionReference requests = _databaseRef.collection('requests');
-  final CollectionReference organizationsDetails = _databaseRef.collection('organization details');
 }

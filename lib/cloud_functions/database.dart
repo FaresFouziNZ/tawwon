@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/models/organization_page_details.dart';
+import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/models/request.dart';
 
 import 'firebase_collections.dart';
@@ -20,14 +20,31 @@ class DatabaseService {
     return await collections.users.doc(user.uid).set(user.toMap(), SetOptions(merge: true));
   }
 
+  Future createOrganization({required Organization organization}) {
+    return collections.organizations.add(organization.toMap());
+  }
+
   Future createRequest({required Request request}) async {
     return await collections.requests.add(request.toMap());
   }
 
-  Future<OrganizationPageDetails> getOrganizationDetails({required String? uid}) async {
-    return await collections.organizationsDetails
+  Future<Organization> getOrganizationDetails({required String? uid}) async {
+    return await collections.organizations
         .doc(uid)
         .get()
-        .then((value) => OrganizationPageDetails.fromMap(value.data() as Map<String, dynamic>));
+        .then((value) => Organization.fromMap(value.data() as Map<String, dynamic>));
+  }
+
+  Future<Organization> getOrganizationByName({required String? name}) async {
+    return await collections.organizations
+        .where('name', isEqualTo: name)
+        .get()
+        .then((value) => Organization.fromMap(value.docs.first.data() as Map<String, dynamic>));
+  }
+
+  Future<List<Organization>> getOrganizations() {
+    return collections.organizations.get().then((value) {
+      return value.docs.map((e) => Organization.fromMap(e.data() as Map<String, dynamic>)).toList();
+    });
   }
 }

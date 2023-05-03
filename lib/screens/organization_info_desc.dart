@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/screens/homePage.dart';
 import 'package:tawwon/screens/organization_work_time.dart';
 
 class organ_desc extends StatelessWidget {
@@ -7,24 +8,21 @@ class organ_desc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Positioned(
-                top: 0,
-                child: Text(
-                  'تفاصيل المنظمة',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                'تفاصيل المنظمة',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             Padding(
@@ -35,23 +33,24 @@ class organ_desc extends StatelessWidget {
                   // Text label
 
                   // Profile picture
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/images/profile.jpeg'),
-                  ),
-                  // Plus sign button
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: FloatingActionButton(
-                      mini: true,
-                      onPressed: () {
-                        // Handle the button press
-                      },
-                      child: Icon(Icons.add),
-                      backgroundColor: Color.fromARGB(255, 19, 75, 121),
+                  Stack(children: [
+                    const CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/images/profile.jpeg'),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 0,
+                      child: FloatingActionButton(
+                        mini: true,
+                        onPressed: () {
+                          // Handle the button press
+                        },
+                        backgroundColor: const Color.fromARGB(255, 19, 75, 121),
+                        child: const Icon(Icons.add),
+                      ),
+                    ),
+                  ]),
+                  // Plus sign button
                 ],
               ),
             ),
@@ -80,17 +79,12 @@ class organ_desc extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const workHours()),
-                    );
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    minimumSize:
-                        MaterialStateProperty.all<Size>(const Size(175, 40)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
                   ),
                   child: const Text(
                     'تخطي',
@@ -99,22 +93,19 @@ class organ_desc extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const workHours()),
+                      MaterialPageRoute(builder: (context) => const SelectWorkHoursView()),
                     );
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    minimumSize:
-                        MaterialStateProperty.all<Size>(const Size(175, 40)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
                   ),
                   child: const Text(
                     'موافق',

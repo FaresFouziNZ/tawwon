@@ -37,7 +37,7 @@ class Auth {
       }
       return _userFromFirebase(user);
     } catch (error) {
-      print(error.toString());
+      // print(error.toString());
       return error.toString().substring(0, error.toString().indexOf(']') + 1);
     }
   }

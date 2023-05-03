@@ -1,23 +1,35 @@
 class Organization {
-  String? name;
-  int? ID;
+  String? time;
   List<String>? types;
+  String? name;
+  String? description;
+  String? uid;
+  String? logoUrl;
 
   Organization({
-    this.name,
-    this.ID,
+    this.time,
     this.types,
+    this.name,
+    this.description,
+    this.uid,
+    this.logoUrl,
   });
 
   factory Organization.fromMap(Map<String, dynamic> json) => Organization(
-        name: json['name'],
-        ID: json['ID'],
+        time: json['time'],
         types: json['types'].cast<String>(),
+        name: json['name'],
+        description: json['description'],
+        uid: json['uid'],
+        logoUrl: json['logoUrl'],
       );
 
   Map<String, dynamic> toMap() => {
-        'name': name,
-        'ID': ID,
+        'time': time,
         'types': types,
+        'name': name,
+        'description': description,
+        'uid': uid,
+        'logoUrl': logoUrl,
       };
 }

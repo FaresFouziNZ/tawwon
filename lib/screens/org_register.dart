@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/screens/create_organization_page1.dart';
+import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/screens/organization_info_desc.dart';
 
 class OrgRegister extends StatelessWidget {
   const OrgRegister({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final name = TextEditingController();
+    final email = TextEditingController();
+    final password = TextEditingController();
+    final auth = Auth();
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: const Text(
           'حساب مؤسسة',
           style: TextStyle(fontSize: 28, fontFamily: 'ReadexPro'),
@@ -36,11 +42,12 @@ class OrgRegister extends StatelessWidget {
                 ),
               ),
               Column(
-                children: const [
+                children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: name,
+                      decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -51,9 +58,10 @@ class OrgRegister extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: email,
+                      decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -64,9 +72,10 @@ class OrgRegister extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: email,
+                      decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -79,8 +88,26 @@ class OrgRegister extends StatelessWidget {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateOrganizationPageView1()));
+                onPressed: () async {
+                  // final result = await auth.registerWithEmailAndPassword(email.text, password.text);
+                  // Organization newOrganization = Organization(name: name.text);
+                  // if (result == null) {
+                  //   print('error');
+                  // } else {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const CreateOrganizationPageView1(),
+                  //     ),
+                  //   );
+                  // }
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const organ_desc(),
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

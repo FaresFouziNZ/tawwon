@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/request.dart';
 
-class OrderDetails2 extends StatelessWidget {
-  const OrderDetails2({super.key});
+class OrderSummary extends StatelessWidget {
+  const OrderSummary({super.key});
 
   @override
   Widget build(BuildContext context) {

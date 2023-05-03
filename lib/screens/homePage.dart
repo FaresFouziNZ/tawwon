@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(10, 20, 270, 30),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const OrganizationPage()));
+              Auth().signOut();
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 33, 55, 83)),

@@ -101,7 +101,7 @@ class OrganizationPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: Row(children: const <Widget>[
+                      child: Row(children: const [
                         Expanded(
                             child: Divider(
                           color: Colors.black,

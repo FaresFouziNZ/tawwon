@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/screens/organization_accepted_donations.dart';
+import 'package:tawwon/models/organization.dart';
+import 'package:tawwon/models/request.dart';
+import 'package:tawwon/screens/order_details2.dart';
 
-class SelectWorkHoursView extends StatefulWidget {
-  const SelectWorkHoursView({super.key});
-
+class OrderDetails extends StatefulWidget {
+  const OrderDetails({super.key, required this.organization});
+  final Organization organization;
   @override
-  State<SelectWorkHoursView> createState() => _SelectWorkHoursViewState();
+  State<OrderDetails> createState() => _OrderDetailsState();
 }
 
-class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
+class _OrderDetailsState extends State<OrderDetails> {
   TimeOfDay startTime = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay endTime = const TimeOfDay(hour: 23, minute: 59);
-
+  // Request newRequest = Request();
   Future<void> selectTime(bool isStart) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -36,22 +38,38 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.only(bottom: 50, top: 75),
               child: Text(
-                'تفاصيل المنظمة',
+                'بلاستيك',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
+            const Directionality(
+              textDirection: TextDirection.rtl,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    ),
+                    labelText: 'ادخل حجم التبرع (مثال 5 جم)',
+                  ),
+                ),
+              ),
+            ),
             const Text(
-              'من الساعة:',
+              ':وقت الاستلام',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             // To display the start time
             Text(
-              startTime == null ? 'Select start time' : ' ${startTime.format(context)}',
+              ' ${startTime.format(context)}',
               style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
             // To show the time picker for start time
@@ -64,29 +82,8 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
                 minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
                 foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFF213753)),
               ),
-              child: const Text('اختر وقت بداية العمل'),
+              child: const Text('اختر وقت الاستلام'),
             ),
-            // To display the end time
-            const SizedBox(height: 20),
-            const Text(
-              'الى:',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            Text(
-              endTime == null ? 'Select end time' : ' ${endTime.format(context)}',
-              style: const TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            // To show the time picker for end time
-            ElevatedButton(
-                onPressed: () {
-                  selectTime(false);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                  minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
-                  foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFF213753)),
-                ),
-                child: const Text('اختر وقت نهاية العمل')),
             const SizedBox(
               height: 20,
             ),
@@ -94,7 +91,7 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const organ_accept()),
+                  MaterialPageRoute(builder: (context) => const OrderSummary()),
                 );
               },
               style: ButtonStyle(
@@ -104,7 +101,7 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
               child: const Text(
                 'التالي',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF213753),
                 ),
               ),
             ),
