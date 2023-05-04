@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/models/request.dart';
 import 'package:tawwon/screens/order_details2.dart';
@@ -13,7 +15,7 @@ class OrderDetails extends StatefulWidget {
 class _OrderDetailsState extends State<OrderDetails> {
   TimeOfDay startTime = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay endTime = const TimeOfDay(hour: 23, minute: 59);
-  // Request newRequest = Request();
+  final sizeController = TextEditingController();
   Future<void> selectTime(bool isStart) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -32,11 +34,15 @@ class _OrderDetailsState extends State<OrderDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 218, 229, 234),
       appBar: AppBar(
+        title: const Text('تفاصيل الطلب'),
+        centerTitle: true,
         elevation: 0,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -44,33 +50,34 @@ class _OrderDetailsState extends State<OrderDetails> {
               padding: EdgeInsets.only(bottom: 50, top: 75),
               child: Text(
                 'بلاستيك',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
               ),
             ),
-            const Directionality(
+            Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: sizeController,
+                  decoration: const InputDecoration(
+                    hintText: 'ادخل حجم التبرع (مثال 5 جم)',
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     ),
-                    labelText: 'ادخل حجم التبرع (مثال 5 جم)',
                   ),
                 ),
               ),
             ),
             const Text(
               ':وقت الاستلام',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             // To display the start time
             Text(
               ' ${startTime.format(context)}',
-              style: const TextStyle(fontSize: 20, color: Colors.white),
+              style: const TextStyle(fontSize: 20, color: Colors.black),
             ),
             // To show the time picker for start time
             ElevatedButton(
@@ -78,9 +85,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                 selectTime(true);
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF213753)),
                 minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
-                foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFF213753)),
               ),
               child: const Text('اختر وقت الاستلام'),
             ),
@@ -89,9 +95,21 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             ElevatedButton(
               onPressed: () {
+                Request newRequest = Request(
+                  donorID: user.uid,
+                  isAccepted: false,
+                  organizationID: widget.organization.uid,
+                  type: 'بلاستيك',
+                  items: {'plastic': sizeController.text as int},
+                  time: startTime.format(context),
+                );
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const OrderSummary()),
+                  MaterialPageRoute(
+                      builder: (context) => OrderSummary(
+                            request: newRequest,
+                            organizationName: widget.organization.name.toString(),
+                          )),
                 );
               },
               style: ButtonStyle(
@@ -101,8 +119,8 @@ class _OrderDetailsState extends State<OrderDetails> {
               child: const Text(
                 'التالي',
                 style: TextStyle(
-                  color: Color(0xFF213753),
-                ),
+                    // color: Color(0xFF213753),
+                    ),
               ),
             ),
           ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/homePage.dart';
+import 'package:tawwon/screens/welcome.dart';
 import 'package:tawwon/widgets/type_square.dart';
 
 import 'requests_view.dart';
@@ -16,18 +18,28 @@ class OrganizationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LocalUser?>(context);
+    Auth auth = Auth();
     print(user?.uid);
     return Scaffold(
       backgroundColor: const Color(0xFFDAE5EA),
       appBar: AppBar(
-          title: const Text('صفحة المنظمة'),
-          centerTitle: true,
-          elevation: 0,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
-          )),
+        title: const Text('صفحة المنظمة'),
+        centerTitle: true,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                auth.signOut();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeView()));
+              },
+              icon: const Icon(Icons.logout)),
+        ],
+      ),
       body: FutureBuilder(
           future: DatabaseService.instance!.getOrganizationDetails(uid: user?.uid),
           builder: (context, snapshot) {
@@ -88,7 +100,10 @@ class OrganizationPage extends StatelessWidget {
                                       Radius.circular(20),
                                     ),
                                   ),
-                                  child: Image.asset('assets/images/Nestle.jpg'),
+                                  child: Image(
+                                      image: NetworkImage(snapshot.data!.logoUrl as String == ''
+                                          ? 'https://cdn.shopify.com/s/files/1/0525/9585/1443/products/mUSSLcWigyy8MTX_800x.jpg?v=1679405599'
+                                          : snapshot.data!.logoUrl as String)),
                                 ),
                                 Visibility(
                                     visible: false,

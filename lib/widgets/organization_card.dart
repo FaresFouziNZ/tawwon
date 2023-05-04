@@ -16,7 +16,12 @@ class OrganizationCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetails()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => OrderDetails(
+                        organization: organization,
+                      )));
         },
         child: Container(
           width: MediaQuery.of(context).size.width * 0.95,

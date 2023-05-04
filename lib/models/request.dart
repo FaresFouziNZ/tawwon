@@ -1,35 +1,39 @@
 class Request {
-  int? ID;
-  int? donorID;
-  int? organizationID;
+  int? rid;
+  String? donorID;
+  String? organizationID;
   String? type;
-  String? items;
+  Map<String,int>? items;
   bool? isAccepted;
+  String? time;
 
   Request({
-    this.ID,
+    this.rid,
     this.donorID,
     this.organizationID,
     this.type,
     this.items,
     this.isAccepted,
+    this.time,
   });
 
   factory Request.fromMap(Map<String, dynamic> json) => Request(
-        ID: json['ID'],
+        rid: json['ID'],
         donorID: json['donorID'],
         organizationID: json['organizationID'],
         type: json['type'],
         items: json['items'],
         isAccepted: json['isAccepted'],
+        time: json['time'],
       );
       
   Map<String, dynamic> toMap() => {
-        'ID': ID,
+        'ID': rid,
         'donorID': donorID,
         'organizationID': organizationID,
         'type': type,
         'items': items,
         'isAccepted': isAccepted,
+        'time': time,
       };
 }

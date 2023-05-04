@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/screens/homePage.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -16,12 +17,12 @@ class LoginView extends StatelessWidget {
           style: TextStyle(fontSize: 28, fontFamily: 'ReadexPro'),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios_new),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -74,13 +75,18 @@ class LoginView extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 await auth.signInWithEmailAndPassword(email.text, password.text);
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               child: const Text(
-                'التالي',
+                'تسجيل الدخول',
                 style: TextStyle(
                   color: Color(0xFF213753),
                 ),

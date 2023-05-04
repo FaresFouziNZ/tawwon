@@ -8,6 +8,7 @@ import 'package:motion_toast/resources/arrays.dart';
 class NewAccountView extends StatefulWidget {
   const NewAccountView({Key? key}) : super(key: key);
 
+  @override
   State createState() => _NewAccountViewState();
 }
 
@@ -24,7 +25,7 @@ class _NewAccountViewState extends State<NewAccountView> {
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new),
+            icon: const Icon(Icons.arrow_back_ios_new),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -51,7 +52,7 @@ class _NewAccountViewState extends State<NewAccountView> {
                   style: ElevatedButton.styleFrom(
                       maximumSize: const Size(150, 150),
                       alignment: Alignment.center,
-                      backgroundColor: Color.fromARGB(255, 27, 36, 48),
+                      backgroundColor: const Color.fromARGB(255, 27, 36, 48),
                       side: decision == 1
                           ? const BorderSide(color: Colors.white, width: 2)
                           : const BorderSide(color: Colors.transparent),
@@ -65,9 +66,9 @@ class _NewAccountViewState extends State<NewAccountView> {
                       Column(
                         children: [
                           Image.asset('assets/images/one.png'),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                            child: const Text("فرد"),
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            child: Text("فرد"),
                           ),
                         ],
                       ),
@@ -81,7 +82,7 @@ class _NewAccountViewState extends State<NewAccountView> {
                   style: ElevatedButton.styleFrom(
                       maximumSize: const Size(150, 150),
                       alignment: Alignment.center,
-                      backgroundColor: Color.fromARGB(255, 27, 36, 48),
+                      backgroundColor: const Color.fromARGB(255, 27, 36, 48),
                       side: decision == 2
                           ? const BorderSide(color: Colors.white, width: 2)
                           : const BorderSide(color: Colors.transparent),
@@ -95,9 +96,9 @@ class _NewAccountViewState extends State<NewAccountView> {
                       Column(
                         children: [
                           Image.asset('assets/images/many.png'),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                            child: const Text("مؤسسة"),
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            child: Text("مؤسسة"),
                           ),
                         ],
                       ),
@@ -107,15 +108,11 @@ class _NewAccountViewState extends State<NewAccountView> {
             ElevatedButton(
               onPressed: () {
                 if (decision == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ClientRegisterView()));
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => const ClientRegisterView()));
                 } else if (decision == 2) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const OrgRegister()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OrgRegister()));
                 } else if (decision == 0) {
                   MotionToast.warning(
                     title: const Text("خطأ"),
@@ -131,8 +128,7 @@ class _NewAccountViewState extends State<NewAccountView> {
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                minimumSize:
-                    MaterialStateProperty.all<Size>(const Size(175, 40)),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),
               ),
               child: const Text(
                 'التالي',

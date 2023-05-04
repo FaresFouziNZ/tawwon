@@ -1,13 +1,11 @@
-
-
 class LocalUser {
   // Basic user
   String? uid;
-  String displayName;
+  String? displayName;
 
   LocalUser({
     required this.uid,
-    required this.displayName,
+     this.displayName,
   });
 
   Map<String, dynamic> toMap() {

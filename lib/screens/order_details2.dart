@@ -3,7 +3,9 @@ import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/request.dart';
 
 class OrderSummary extends StatelessWidget {
-  const OrderSummary({super.key});
+  const OrderSummary({super.key, required this.request, required this.organizationName});
+  final Request request;
+  final String organizationName;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,6 @@ class OrderSummary extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.menu_outlined),
-              onPressed: () {},
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -86,11 +82,11 @@ class OrderSummary extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-                              child: const Padding(
+                              child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                  child: Text('3:00PM - 9:00PM',
+                                  child: Text(request.time.toString(),
                                       style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 33, 55, 83))),
                                 ),
                               ),
@@ -134,8 +130,7 @@ class OrderSummary extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: const [
-                            Text(':المنظمة المطلوبة',
-                                style: TextStyle(fontSize: 26, color: Color.fromARGB(255, 33, 55, 83)))
+                            Text('', style: TextStyle(fontSize: 26, color: Color.fromARGB(255, 33, 55, 83)))
                           ],
                         ),
                       ),
@@ -167,9 +162,9 @@ class OrderSummary extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           //send request
-                          DatabaseService.instance!.createRequest(request: Request());
+                          await DatabaseService.instance!.createRequest(request: Request());
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -187,7 +182,7 @@ class OrderSummary extends StatelessWidget {
                                   actions: [
                                     Center(
                                       child: ElevatedButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           Navigator.popUntil(context, (route) => route.isFirst);
                                         },
                                         child: const Text('عودة', style: TextStyle(fontSize: 16)),

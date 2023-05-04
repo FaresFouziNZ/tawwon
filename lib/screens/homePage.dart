@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/screens/login_view.dart';
 import 'package:tawwon/screens/orgnaization_view.dart';
 import 'package:tawwon/screens/requests_view.dart';
 import 'package:tawwon/screens/select_organization_view.dart';
@@ -30,18 +29,6 @@ class HomePage extends StatelessWidget {
         //     Navigator.pop(context);
         //   },
         // ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              if (user?.uid != null) {
-                print(user?.uid);
-              } else {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
-              }
-            },
-          ),
-        ],
       ),
       body: Column(children: [
         const SizedBox(height: 100),

@@ -29,10 +29,12 @@ class DatabaseService {
   }
 
   Future<Organization> getOrganizationDetails({required String? uid}) async {
-    return await collections.organizations
-        .doc(uid)
-        .get()
-        .then((value) => Organization.fromMap(value.data() as Map<String, dynamic>));
+    return await collections.organizations.doc(uid).get().then((value) {
+      if (value.data() == null) {
+        return Organization(description: '', name: '', uid: '', logoUrl: '', time: '', types: []);
+      }
+      return Organization.fromMap(value.data() as Map<String, dynamic>);
+    });
   }
 
   Future<Organization> getOrganizationByName({required String? name}) async {

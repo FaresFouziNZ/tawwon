@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/local_user.dart';
-
-
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -53,9 +50,13 @@ class Auth {
 
       return _userFromFirebase(user);
     } catch (error) {
-      print(error.toString());
+      // final id =
       return null;
     }
+  }
+
+  String uid() {
+    return _auth.currentUser!.uid;
   }
 
   Future signOut() async {
