@@ -27,6 +27,34 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
       });
     }
   }
+  bool isValidTimeRange() {
+  int startSeconds = startTime.hour * 3600 + startTime.minute * 60;
+  int endSeconds = endTime.hour * 3600 + endTime.minute * 60;
+  return endSeconds > startSeconds;
+}
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop(); 
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    content: Text("اختر الوقت بشكل صحيح"), 
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +120,15 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
             ),
             ElevatedButton(
               onPressed: () {
+                if(isValidTimeRange()){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const organ_accept()),
                 );
+              }
+              else{
+                  showAlertDialog(context);
+              }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF039C8A)),
