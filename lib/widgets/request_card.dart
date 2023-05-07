@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/models/request.dart';
 
 class RequestCard extends StatelessWidget {
-  const RequestCard({super.key});
-
+  const RequestCard({super.key, required this.request});
+  final Request request;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,28 +33,6 @@ class RequestCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                      width: 45,
-                      height: 45,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFE14D4D),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'ورق',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.white,
-                            fontFamily: 'ReadexPro',
-                          ),
-                        ),
-                      )),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Container(

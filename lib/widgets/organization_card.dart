@@ -42,7 +42,10 @@ class OrganizationCard extends StatelessWidget {
                     Radius.circular(10),
                   ),
                 ),
-                child: Image(image: NetworkImage(organization.logoUrl as String)),
+                child: Image(
+                    image: NetworkImage(organization.logoUrl as String == ""
+                        ? "https://cdn.shopify.com/s/files/1/0525/9585/1443/products/mUSSLcWigyy8MTX_800x.jpg?v=1679405599"
+                        : organization.logoUrl as String)),
               ),
               const VerticalDivider(
                 indent: 5,

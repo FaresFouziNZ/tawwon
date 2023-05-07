@@ -100,7 +100,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   isAccepted: false,
                   organizationID: widget.organization.uid,
                   type: 'بلاستيك',
-                  items: {'plastic': sizeController.text as int},
+                  items: {'plastic': int.parse(sizeController.text)},
                   time: startTime.format(context),
                 );
                 Navigator.push(

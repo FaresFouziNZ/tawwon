@@ -1,6 +1,6 @@
 class Organization {
   String? time;
-  List<String>? types;
+  List<String?>? types;
   String? name;
   String? description;
   String? uid;
@@ -21,7 +21,7 @@ class Organization {
         name: json['name'],
         description: json['description'],
         uid: json['uid'],
-        logoUrl: json['logoUrl'],
+        logoUrl: json['logoUrl'] ?? '',
       );
 
   Map<String, dynamic> toMap() => {

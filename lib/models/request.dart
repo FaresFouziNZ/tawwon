@@ -1,14 +1,12 @@
 class Request {
-  int? rid;
   String? donorID;
   String? organizationID;
   String? type;
-  Map<String,int>? items;
+  Map<dynamic, dynamic>? items;
   bool? isAccepted;
   String? time;
 
   Request({
-    this.rid,
     this.donorID,
     this.organizationID,
     this.type,
@@ -18,7 +16,6 @@ class Request {
   });
 
   factory Request.fromMap(Map<String, dynamic> json) => Request(
-        rid: json['ID'],
         donorID: json['donorID'],
         organizationID: json['organizationID'],
         type: json['type'],
@@ -26,9 +23,8 @@ class Request {
         isAccepted: json['isAccepted'],
         time: json['time'],
       );
-      
+
   Map<String, dynamic> toMap() => {
-        'ID': rid,
         'donorID': donorID,
         'organizationID': organizationID,
         'type': type,

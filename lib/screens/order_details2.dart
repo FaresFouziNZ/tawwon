@@ -83,11 +83,11 @@ class OrderSummary extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                  padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
                                   child: Text(request.time.toString(),
-                                      style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 33, 55, 83))),
+                                      style: const TextStyle(fontSize: 16, color: Color.fromARGB(255, 33, 55, 83))),
                                 ),
                               ),
                             ),
@@ -130,7 +130,7 @@ class OrderSummary extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: const [
-                            Text('', style: TextStyle(fontSize: 26, color: Color.fromARGB(255, 33, 55, 83)))
+                            Text('اسم المنظمة', style: TextStyle(fontSize: 26, color: Color.fromARGB(255, 33, 55, 83)))
                           ],
                         ),
                       ),
@@ -164,7 +164,7 @@ class OrderSummary extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () async {
                           //send request
-                          await DatabaseService.instance!.createRequest(request: Request());
+                          await DatabaseService.instance!.createRequest(request: request);
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {

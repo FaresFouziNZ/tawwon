@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/screens/homePage.dart';
 import 'package:tawwon/screens/organization_work_time.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class organ_desc extends StatelessWidget {
-  const organ_desc({super.key});
-
+  const organ_desc({super.key, required this.newOrganization});
+  final Organization newOrganization;
   @override
   Widget build(BuildContext context) {
+    final TextEditingController description = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -55,13 +58,14 @@ class organ_desc extends StatelessWidget {
               ),
             ),
             Column(
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: TextField(
+                    controller: description,
                     textAlign: TextAlign.center,
                     textAlignVertical: TextAlignVertical.top,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -97,10 +101,16 @@ class organ_desc extends StatelessWidget {
                   width: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    // Organization newOrganization = Organization();
+                    newOrganization.description = description.text;
+                    // final String text = description.text;
+                    // await docRef.update({'description': text});
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SelectWorkHoursView()),
+                      MaterialPageRoute(builder: (context) =>  SelectWorkHoursView(
+                            newOrganization: newOrganization,
+                      )),
                     );
                   },
                   style: ButtonStyle(

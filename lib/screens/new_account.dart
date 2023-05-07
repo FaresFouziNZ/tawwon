@@ -112,7 +112,7 @@ class _NewAccountViewState extends State<NewAccountView> {
                   Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (context) => const ClientRegisterView()));
                 } else if (decision == 2) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OrgRegister()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OrganizationRegister()));
                 } else if (decision == 0) {
                   MotionToast.warning(
                     title: const Text("خطأ"),

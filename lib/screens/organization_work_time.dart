@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/models/organization.dart';
+import 'package:tawwon/screens/choose_type.dart';
 import 'package:tawwon/screens/organization_accepted_donations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SelectWorkHoursView extends StatefulWidget {
-  const SelectWorkHoursView({super.key});
-
+  const SelectWorkHoursView({super.key, required this.newOrganization});
+  final Organization newOrganization;
   @override
   State<SelectWorkHoursView> createState() => _SelectWorkHoursViewState();
 }
@@ -27,34 +30,42 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
       });
     }
   }
+
   bool isValidTimeRange() {
-  int startSeconds = startTime.hour * 3600 + startTime.minute * 60;
-  int endSeconds = endTime.hour * 3600 + endTime.minute * 60;
-  return endSeconds > startSeconds;
-}
-showAlertDialog(BuildContext context) {
-  // set up the button
-  Widget okButton = TextButton(
-    child: Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop(); 
-    },
-  );
+    int startSeconds = startTime.hour * 3600 + startTime.minute * 60;
+    int endSeconds = endTime.hour * 3600 + endTime.minute * 60;
+    return endSeconds > startSeconds;
+  }
 
-  AlertDialog alert = AlertDialog(
-    content: Text("اختر الوقت بشكل صحيح"), 
-    actions: [
-      okButton,
-    ],
-  );
+  String timeToText() {
+    String start = "${startTime.hour}:${startTime.minute}";
+    String end = "${endTime.hour}:${endTime.minute}";
+    return "$start - $end";
+  }
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      content: const Text("اختر الوقت بشكل صحيح"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,16 +130,20 @@ showAlertDialog(BuildContext context) {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {
-                if(isValidTimeRange()){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const organ_accept()),
-                );
-              }
-              else{
+              onPressed: () async {
+                if (isValidTimeRange()) {
+                  final String text = timeToText();
+                  widget.newOrganization.time = text;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Choose_type(
+                              newOrganization: widget.newOrganization,
+                            )),
+                  );
+                } else {
                   showAlertDialog(context);
-              }
+                }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF039C8A)),

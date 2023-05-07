@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'homePage.dart';
 
 // ignore: camel_case_types
 class organ_accept extends StatefulWidget {
@@ -56,7 +57,9 @@ class _organ_acceptState extends State<organ_accept> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                     minimumSize: MaterialStateProperty.all<Size>(const Size(175, 40)),

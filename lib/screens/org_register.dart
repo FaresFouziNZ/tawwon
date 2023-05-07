@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
+import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/models/local_user.dart';
+import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/screens/organization_info_desc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class OrgRegister extends StatelessWidget {
-  const OrgRegister({super.key});
+class OrganizationRegister extends StatelessWidget {
+  const OrganizationRegister({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final regex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    // final CollectionReference descStore = FirebaseFirestore.instance.collection('organizations');
+    // final DocumentReference docRef = descStore.doc('c9YcUP4twZUeOFnfeKvCJRsDKgv2');
     final name = TextEditingController();
     final email = TextEditingController();
     final password = TextEditingController();
     final auth = Auth();
+    final user = Provider.of<LocalUser>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -74,7 +84,8 @@ class OrgRegister extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
-                      controller: email,
+                      obscureText: true,
+                      controller: password,
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -97,17 +108,35 @@ class OrgRegister extends StatelessWidget {
                   //   Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
-                  //       builder: (context) => const CreateOrganizationPageView1(),
+                  //       builder: (context) => const organ_desc(),
                   //     ),
                   //   );
                   // }
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const organ_desc(),
-                    ),
-                  );
+                  if (regex.hasMatch(email.text)) {
+                    await auth.registerWithEmailAndPassword(email.text, password.text);
+                    // final String text = name.text;
+                    // await docRef.set({'name': text});
+                    Organization newOrganization = Organization();
+                    newOrganization.name = name.text;
+                    newOrganization.uid = user.uid;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => organ_desc(newOrganization: newOrganization),
+                      ),
+                    );
+                  } else {
+                    MotionToast.warning(
+                      title: const Text("خطأ"),
+                      description: const Text("الرجاء إدخال بريد إلكتروني صحيح"),
+                      layoutOrientation: ToastOrientation.rtl,
+                      animationType: AnimationType.fromRight,
+                      animationDuration: const Duration(milliseconds: 500),
+                      animationCurve: Curves.fastOutSlowIn,
+                      displayBorder: true,
+                      position: MotionToastPosition.bottom,
+                    ).show(context);
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

@@ -30,9 +30,12 @@ class DatabaseService {
 
   Future<Organization> getOrganizationDetails({required String? uid}) async {
     return await collections.organizations.doc(uid).get().then((value) {
+      print('a');
       if (value.data() == null) {
         return Organization(description: '', name: '', uid: '', logoUrl: '', time: '', types: []);
       }
+      var x = value.data();
+      print(x);
       return Organization.fromMap(value.data() as Map<String, dynamic>);
     });
   }
@@ -48,5 +51,12 @@ class DatabaseService {
     return collections.organizations.get().then((value) {
       return value.docs.map((e) => Organization.fromMap(e.data() as Map<String, dynamic>)).toList();
     });
+  }
+
+  Future<List<Request>> getRequestsByUid({required String? uid}) async {
+    return await collections.requests
+        .where('organizationID', isEqualTo: uid)
+        .get()
+        .then((value) => value.docs.map((e) => Request.fromMap(e.data() as Map<String, dynamic>)).toList());
   }
 }

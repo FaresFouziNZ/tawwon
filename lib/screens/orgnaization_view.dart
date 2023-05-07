@@ -19,7 +19,6 @@ class OrganizationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<LocalUser?>(context);
     Auth auth = Auth();
-    print(user?.uid);
     return Scaffold(
       backgroundColor: const Color(0xFFDAE5EA),
       appBar: AppBar(

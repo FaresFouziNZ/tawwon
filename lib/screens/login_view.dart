@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
+import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/homePage.dart';
 
 class LoginView extends StatelessWidget {
@@ -10,8 +14,10 @@ class LoginView extends StatelessWidget {
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
     final auth = Auth();
+    final user = Provider.of<LocalUser?>(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: const Text(
           ' تسجيل دخول',
           style: TextStyle(fontSize: 28, fontFamily: 'ReadexPro'),
@@ -58,6 +64,8 @@ class LoginView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
+                      obscureText: true,
+                      autocorrect: false,
                       controller: password,
                       decoration: const InputDecoration(
                         filled: true,
@@ -74,13 +82,28 @@ class LoginView extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                await auth.signInWithEmailAndPassword(email.text, password.text);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                );
+                var result = await auth.signInWithEmailAndPassword(email.text, password.text);
+                if (result == "") {
+                  Navigator.popUntil(context, (route) => route.isFirst);
+
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                } else {
+                  MotionToast.warning(
+                    title: const Text("خطأ"),
+                    description: const Text("البريد الالكتروني او كلمة المرور خطأ"),
+                    layoutOrientation: ToastOrientation.rtl,
+                    animationType: AnimationType.fromRight,
+                    animationDuration: const Duration(milliseconds: 500),
+                    animationCurve: Curves.fastOutSlowIn,
+                    displayBorder: true,
+                    position: MotionToastPosition.bottom,
+                  ).show(context);
+                }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
