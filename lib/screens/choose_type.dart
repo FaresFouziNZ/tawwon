@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/database.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/screens/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +17,7 @@ class _Choose_type extends State<Choose_type> {
   List<bool> isSelected = [false, false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser?>(context);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -216,6 +219,7 @@ class _Choose_type extends State<Choose_type> {
               onPressed: () async {
                 widget.newOrganization.types = ['plastic'];
                 widget.newOrganization.logoUrl = "";
+                widget.newOrganization.uid = user?.uid;
                 await DatabaseService().createOrganization(organization: widget.newOrganization);
                 await showDialog(
                     context: context,

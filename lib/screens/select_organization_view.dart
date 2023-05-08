@@ -22,8 +22,10 @@ class SelectOrganizationView extends StatelessWidget {
               } else if (snapshot.data == null) {
                 return const Center(child: Text('لا يوجد منظمات'));
               } else {
-                return Column(
-                  children: snapshot.data!.map((e) => OrganizationCard(organization: e)).toList(),
+                return SingleChildScrollView(
+                  child: Column(
+                    children: snapshot.data!.map((e) => OrganizationCard(organization: e)).toList(),
+                  ),
                 );
               }
             }),

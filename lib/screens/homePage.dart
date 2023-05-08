@@ -136,14 +136,16 @@ class HomePage extends StatelessWidget {
                 size: 35,
               ),
               IconButton(
+                
                   onPressed: () {
                     Navigator.pushReplacement(
                         context, MaterialPageRoute(builder: (context) => const OrganizationPage()));
-                  },
+                  }, 
                   icon: const Icon(
                     Icons.person,
                     color: Colors.white,
                     size: 35,
+                    
                   ))
             ],
           ),

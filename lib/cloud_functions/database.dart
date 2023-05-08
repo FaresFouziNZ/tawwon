@@ -21,7 +21,7 @@ class DatabaseService {
   }
 
   Future createOrganization({required Organization organization}) {
-    return collections.organizations.add(organization.toMap());
+    return collections.organizations.doc(organization.uid).set(organization.toMap(), SetOptions(merge: true));
   }
 
   Future createRequest({required Request request}) async {
@@ -32,7 +32,13 @@ class DatabaseService {
     return await collections.organizations.doc(uid).get().then((value) {
       print('a');
       if (value.data() == null) {
-        return Organization(description: '', name: '', uid: '', logoUrl: '', time: '', types: []);
+        return collections.organizations.where('uid', isEqualTo: uid).get().then((value) {
+          print('b');
+          if (value.docs.isEmpty) {
+            return Organization(description: '', name: '', uid: '', logoUrl: '', time: '', types: []);
+          }
+          return Organization.fromMap(value.docs.first.data() as Map<String, dynamic>);
+        });
       }
       var x = value.data();
       print(x);

@@ -70,11 +70,11 @@ class OrganizationPage extends StatelessWidget {
                                   ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: const [
-                                      Icon(Icons.watch_later_outlined),
+                                    children: [
+                                      const Icon(Icons.watch_later_outlined),
                                       Text(
-                                        '7:40 AM - 4:00 PM',
-                                        style: TextStyle(
+                                        snapshot.data!.time as String,
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           fontFamily: 'ReadexPro',
                                         ),

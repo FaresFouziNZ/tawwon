@@ -66,6 +66,7 @@ class ClientRegisterView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
+                      obscureText: true,
                       controller: password,
                       decoration: const InputDecoration(
                         hintText: 'كلمة المرور',
@@ -81,6 +82,7 @@ class ClientRegisterView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
+                      obscureText: true,
                       controller: passwordConfirm,
                       decoration: const InputDecoration(
                         hintText: 'تاكيد كلمة المرور',
@@ -126,8 +128,7 @@ class ClientRegisterView extends StatelessWidget {
                             ));
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
                   }
-                } else {
-                }
+                } else {}
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

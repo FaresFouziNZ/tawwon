@@ -118,7 +118,6 @@ class OrganizationRegister extends StatelessWidget {
                     // await docRef.set({'name': text});
                     Organization newOrganization = Organization();
                     newOrganization.name = name.text;
-                    newOrganization.uid = user.uid;
                     Navigator.push(
                       context,
                       MaterialPageRoute(

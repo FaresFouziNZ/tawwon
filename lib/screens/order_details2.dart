@@ -141,12 +141,12 @@ class OrderSummary extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-                              child: const Padding(
-                                padding: EdgeInsets.all(8.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                  child: Text('Nestle',
-                                      style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 33, 55, 83))),
+                                  padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                  child: Text(organizationName,
+                                      style: const TextStyle(fontSize: 16, color: Color.fromARGB(255, 33, 55, 83))),
                                 ),
                               ),
                             ),
