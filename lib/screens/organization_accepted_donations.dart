@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homePage.dart';
+import 'package:tawwon/widgets/bottom_navigation.dart';
 
 // ignore: camel_case_types
 class organ_accept extends StatefulWidget {
@@ -58,7 +58,8 @@ class _organ_acceptState extends State<organ_accept> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                    Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

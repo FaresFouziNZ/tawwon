@@ -4,7 +4,7 @@ import 'package:motion_toast/resources/arrays.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/screens/homePage.dart';
+import 'package:tawwon/widgets/bottom_navigation.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -89,7 +89,7 @@ class LoginView extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => const BottomNavigation(),
                     ),
                   );
                 } else {
