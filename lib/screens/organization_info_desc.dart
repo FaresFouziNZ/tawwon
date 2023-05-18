@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/models/organization.dart';
-import 'package:tawwon/screens/homePage.dart';
 import 'package:tawwon/screens/organization_work_time.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tawwon/widgets/bottom_navigation.dart';
 
 class organ_desc extends StatelessWidget {
   const organ_desc({super.key, required this.newOrganization});
@@ -84,7 +83,8 @@ class organ_desc extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.popUntil(context, (route) => route.isFirst);
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                    Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -108,9 +108,11 @@ class organ_desc extends StatelessWidget {
                     // await docRef.update({'description': text});
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  SelectWorkHoursView(
-                            newOrganization: newOrganization,
-                      )),
+                      MaterialPageRoute(
+                        builder: (context) => SelectWorkHoursView(
+                          newOrganization: newOrganization,
+                        ),
+                      ),
                     );
                   },
                   style: ButtonStyle(

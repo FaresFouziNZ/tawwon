@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/welcome.dart';
-
-import 'homePage.dart';
+import 'package:tawwon/widgets/bottom_navigation.dart';
 
 class ClientRegisterView extends StatelessWidget {
   const ClientRegisterView({super.key});
@@ -121,12 +120,13 @@ class ClientRegisterView extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.popUntil(context, (route) => route.isFirst);
                                       Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) => const HomePage()));
+                                          context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
                                     },
                                     child: const Text('التالي'))
                               ],
                             ));
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                    Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
                   }
                 } else {}
               },
