@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/screens/orgnaization_view.dart';
-import 'package:tawwon/screens/requests_view.dart';
 import 'package:tawwon/screens/select_organization_view.dart';
 
 import '../cloud_functions/Auth.dart';
@@ -102,55 +100,6 @@ class HomePage extends StatelessWidget {
           ),
         )
       ]),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.1,
-          decoration: const BoxDecoration(
-            color: Color(0xFF1B2430),
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Icon(
-                Icons.home,
-                color: Colors.white,
-                size: 35,
-              ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RequestsView()));
-                  },
-                  icon: const Icon(
-                    Icons.message,
-                    color: Colors.white,
-                    size: 35,
-                  )),
-              const Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 35,
-              ),
-              IconButton(
-                
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => const OrganizationPage()));
-                  }, 
-                  icon: const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 35,
-                    
-                  ))
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
