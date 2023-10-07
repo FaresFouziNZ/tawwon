@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/models/organization.dart';
-import 'package:tawwon/screens/orderdet1.dart';
+import 'package:tawwon/screens/old_ui/orderdet1.dart';
 
 import 'type_square.dart';
 

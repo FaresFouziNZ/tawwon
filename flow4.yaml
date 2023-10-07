@@ -1,0 +1,11 @@
+description: My first Fluttium flow.
+---
+- expectVisible: "مساهمتك في الحفاظ على كوكبنا تبدأ من هنا"
+- tapOn: "تسجيل الدخول"
+- expectVisible: "تسجيل الدخول"
+- tapOn: "بريدك الالكتروني"
+- inputText: "taawon@gmail.com"
+- tapOn: "كلمة المرور"
+- inputText: "123456789"
+- tapOn: "تسجيل الدخول"
+- expectVisible: "مرحبا بك"

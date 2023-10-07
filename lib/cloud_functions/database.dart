@@ -40,8 +40,8 @@ class DatabaseService {
           return Organization.fromMap(value.docs.first.data() as Map<String, dynamic>);
         });
       }
-      var x = value.data();
-      print(x);
+      // var x = value.data();
+      // print(x);
       return Organization.fromMap(value.data() as Map<String, dynamic>);
     });
   }
@@ -60,9 +60,20 @@ class DatabaseService {
   }
 
   Future<List<Request>> getRequestsByUid({required String? uid}) async {
-    return await collections.requests
+    if (uid == null) {
+      return [];
+    }
+    List<Request> requests = [];
+    var x = await collections.requests
+        .where('donorID', isEqualTo: uid)
+        .get()
+        .then((value) => value.docs.map((e) => Request.fromMap(e.data() as Map<String, dynamic>)).toList());
+    requests.addAll(x);
+    x = await collections.requests
         .where('organizationID', isEqualTo: uid)
         .get()
         .then((value) => value.docs.map((e) => Request.fromMap(e.data() as Map<String, dynamic>)).toList());
+    requests.addAll(x);
+    return requests;
   }
 }

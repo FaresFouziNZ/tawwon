@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/widgets/bottom_navigation.dart';
+import 'package:tawwon/screens/old_ui/create_organization_page2.dart';
+import 'package:tawwon/screens/old_ui/homePage.dart';
 
 class CreateOrganizationPageView1 extends StatelessWidget {
   const CreateOrganizationPageView1({super.key});
@@ -74,7 +75,7 @@ class CreateOrganizationPageView1 extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: const Color(0xFFFFFFFF),
@@ -84,10 +85,7 @@ class CreateOrganizationPageView1 extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const BottomNavigation())); //change to create org page 2 later this is tr8ee3
+                      context, MaterialPageRoute(builder: (context) => const HomePage())); //change to create org page 2 later this is tr8ee3
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: const Color(0xFF213753),

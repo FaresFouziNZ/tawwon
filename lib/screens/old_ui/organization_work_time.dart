@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/models/organization.dart';
-import 'package:tawwon/screens/choose_type.dart';
-import 'package:tawwon/screens/organization_accepted_donations.dart';
+import 'package:tawwon/screens/old_ui/choose_type.dart';
+import 'package:tawwon/screens/old_ui/organization_accepted_donations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SelectWorkHoursView extends StatefulWidget {

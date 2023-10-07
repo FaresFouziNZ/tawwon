@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/screens/welcome.dart';
-import 'package:tawwon/widgets/type_square.dart';
+import 'package:tawwon/screens/old_ui/homePage.dart';
+import 'package:tawwon/screens/old_ui/welcome.dart';
+import 'package:tawwon/widgets/old_ui/type_square.dart';
+
+import 'requests_view.dart';
 
 class OrganizationPage extends StatelessWidget {
   const OrganizationPage({
@@ -180,6 +183,52 @@ class OrganizationPage extends StatelessWidget {
               );
             }
           }),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.1,
+          decoration: const BoxDecoration(
+            color: Color(0xFF1B2430),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                  },
+                  icon: const Icon(
+                    Icons.home,
+                    color: Colors.white,
+                    size: 35,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RequestsView()));
+                  },
+                  icon: const Icon(
+                    Icons.message,
+                    color: Colors.white,
+                    size: 35,
+                  )),
+              const Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 35,
+              ),
+              const Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 35,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

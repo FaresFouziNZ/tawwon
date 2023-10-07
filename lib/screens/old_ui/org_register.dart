@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
-import 'package:tawwon/screens/organization_info_desc.dart';
+import 'package:tawwon/screens/old_ui/organization_info_desc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrganizationRegister extends StatelessWidget {
@@ -14,8 +14,6 @@ class OrganizationRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final regex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    // final CollectionReference descStore = FirebaseFirestore.instance.collection('organizations');
-    // final DocumentReference docRef = descStore.doc('c9YcUP4twZUeOFnfeKvCJRsDKgv2');
     final name = TextEditingController();
     final email = TextEditingController();
     final password = TextEditingController();

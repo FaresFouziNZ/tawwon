@@ -1,0 +1,34 @@
+description: My first Fluttium flow.
+---
+
+- expectVisible: "مساهمتك في الحفاظ على كوكبنا تبدأ من هنا"
+- tapOn: "إبدأ"
+- expectVisible: "حساب جديد"
+- tapOn: "فرد"
+- tapOn: "التالي"
+- expectVisible: "حساب فرد"
+- tapOn: "البريد الإلكتروني"
+- inputText: "aaaaa@gmail.com"
+- tapOn: "كلمة المرور"
+- inputText: "aaaaa123"
+- tapOn: "تاكيد كلمة المرور"
+- inputText: "aaaaa123"
+- tapOn: "التالي"
+- expectVisible: "تم"
+- tapOn: "التالي"
+- expectVisible: "مرحبا بك"
+- pressOn:
+    offset: [70.0, 266.0]
+- expectVisible: "اختيار منظمة"
+- pressOn:
+    offset: [70.0, 266.0]
+- expectVisible: "تفاصيل الطلب"
+- tapOn: "ادخل حجم التبرع (مثال 5 جم)"
+- inputText: "5"
+- tapOn: "التالي"
+- expectVisible: "تفاصيل الطلب"
+- tapOn: "تاكيد الطلب"
+- expectVisible: "تم ارسال طلبك"
+- tapOn: "عودة"
+- expectVisible: "مرحبا بك"
+

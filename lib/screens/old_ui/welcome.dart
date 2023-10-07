@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/screens/new_account.dart';
-import 'package:tawwon/screens/login_view.dart';
+import 'package:tawwon/screens/old_ui/new_account.dart';
+import 'package:tawwon/screens/old_ui/login_view.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});

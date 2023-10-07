@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/models/request.dart';
-import 'package:tawwon/screens/order_details2.dart';
+import 'package:tawwon/screens/old_ui/order_details2.dart';
 
 class OrderDetails extends StatefulWidget {
   const OrderDetails({super.key, required this.organization});
@@ -100,7 +100,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   isAccepted: false,
                   organizationID: widget.organization.uid,
                   type: 'بلاستيك',
-                  items: {'plastic': int.parse(sizeController.text)},
+                  items: {'plastic': sizeController.text},
                   time: startTime.format(context),
                 );
                 Navigator.push(

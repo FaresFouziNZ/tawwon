@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
+import 'package:tawwon/screens/old_ui/homePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tawwon/widgets/bottom_navigation.dart';
 
 class Choose_type extends StatefulWidget {
   const Choose_type({Key? key, required this.newOrganization}) : super(key: key);
@@ -228,7 +228,7 @@ class _Choose_type extends State<Choose_type> {
                           content: Text('تم إنشاء المنظمة بنجاح'),
                         ));
                 Navigator.popUntil(context, (route) => route.isFirst);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNavigation()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

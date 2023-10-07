@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/database.dart';
-import 'package:tawwon/widgets/organization_card.dart';
+import 'package:tawwon/widgets/old_ui/organization_card.dart';
 
 class SelectOrganizationView extends StatelessWidget {
   const SelectOrganizationView({super.key, required this.type});

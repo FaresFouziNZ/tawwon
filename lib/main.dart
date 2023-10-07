@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
-import 'package:tawwon/screens/welcome.dart';
+import 'package:tawwon/screens/old_ui/welcome.dart';
 import 'firebase_options.dart';
 
 void main() async {
