@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/screens/new_ui/on_boarding.dart';
 import 'package:tawwon/screens/old_ui/welcome.dart';
 import 'firebase_options.dart';
 
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const WelcomeView(),
+          home: const OnBoarding(),
           theme: ThemeData(
               primaryColor: const Color(0xFF213753),
               scaffoldBackgroundColor: const Color(0xFF213753),
