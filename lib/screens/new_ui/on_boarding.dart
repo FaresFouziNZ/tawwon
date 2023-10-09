@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
-class OnBoarding extends StatelessWidget {
+class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
 
+  @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
+
+class _OnBoardingState extends State<OnBoarding> {
+  final controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF213753),
       body: PageView(
+        controller: controller,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -46,7 +53,7 @@ class OnBoarding extends StatelessWidget {
                 ],
               ),
               const Padding(
-                padding: EdgeInsets.only(top: 150), //Probably need fixing
+                padding: EdgeInsets.only(top: 50), //Probably need fixing
                 child: Text('!مرحبا بك في تطبيق تعاون', style: TextStyle(color: Colors.white, fontSize: 24)),
               ),
               const Padding(
@@ -56,7 +63,9 @@ class OnBoarding extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.only(bottom: 20, top: 50),
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffffffff),
                         shape: RoundedRectangleBorder(
@@ -107,7 +116,7 @@ class OnBoarding extends StatelessWidget {
                 ],
               ),
               const Padding(
-                padding: EdgeInsets.only(top: 150), //Probably need fixing
+                padding: EdgeInsets.only(top: 50), //Probably need fixing
                 child: Text('نساعدك تتخلص من النفايات\n بأفضل الطرق',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -122,7 +131,9 @@ class OnBoarding extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.only(bottom: 20, top: 50),
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffffffff),
                         shape: RoundedRectangleBorder(
@@ -173,7 +184,7 @@ class OnBoarding extends StatelessWidget {
                 ],
               ),
               const Padding(
-                padding: EdgeInsets.only(top: 150), //Probably need fixing
+                padding: EdgeInsets.only(top: 50), //Probably need fixing
                 child: Text(
                   'اشتري/بيع اي غرض ممكن الناس تستفيد منه',
                   style: TextStyle(color: Colors.white, fontSize: 24),
