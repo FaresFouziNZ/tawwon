@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/screens/new_ui/page_holder.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -198,7 +199,9 @@ class _OnBoardingState extends State<OnBoarding> {
               Padding(
                   padding: const EdgeInsets.only(bottom: 20, top: 50),
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PageHolder()));
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffffffff),
                         shape: RoundedRectangleBorder(
