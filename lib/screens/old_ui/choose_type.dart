@@ -220,7 +220,7 @@ class _Choose_type extends State<Choose_type> {
                 widget.newOrganization.types = ['plastic'];
                 widget.newOrganization.logoUrl = "";
                 widget.newOrganization.uid = user?.uid;
-                await DatabaseService().createOrganization(organization: widget.newOrganization);
+                // await DatabaseService().createOrganization(organization: widget.newOrganization);
                 await showDialog(
                     context: context,
                     builder: (context) => const AlertDialog(

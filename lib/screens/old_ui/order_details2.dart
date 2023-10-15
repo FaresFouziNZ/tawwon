@@ -164,7 +164,7 @@ class OrderSummary extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () async {
                           //send request
-                          await DatabaseService.instance!.createRequest(request: request);
+                          // await DatabaseService.instance!.createRequest(request: request);
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {

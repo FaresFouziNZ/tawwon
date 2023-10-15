@@ -1,39 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:tawwon/cloud_functions/database.dart';
-import 'package:tawwon/widgets/old_ui/organization_card.dart';
+// import 'package:flutter/material.dart';
+// import 'package:tawwon/cloud_functions/database.dart';
+// import 'package:tawwon/widgets/old_ui/organization_card.dart';
 
-class SelectOrganizationView extends StatelessWidget {
-  const SelectOrganizationView({super.key, required this.type});
-  final String type;
+// class SelectOrganizationView extends StatelessWidget {
+//   const SelectOrganizationView({super.key, required this.type});
+//   final String type;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 218, 229, 234),
-      appBar: AppBar(
-        title: const Text('اختيار منظمة'),
-      ),
-      body: Center(
-        child: FutureBuilder(
-            future: DatabaseService().getOrganizations(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.data == null) {
-                return const Center(child: Text('لا يوجد منظمات'));
-              } else {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: snapshot.data!.map((e) => OrganizationCard(organization: e)).toList(),
-                  ),
-                );
-              }
-            }),
-      ),
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: const Color.fromARGB(255, 218, 229, 234),
+//       appBar: AppBar(
+//         title: const Text('اختيار منظمة'),
+//       ),
+//       body: Center(
+//         child: FutureBuilder(
+//             future: DatabaseService().getOrganizations(),
+//             builder: (context, snapshot) {
+//               if (snapshot.connectionState != ConnectionState.done) {
+//                 return const CircularProgressIndicator();
+//               } else if (snapshot.data == null) {
+//                 return const Center(child: Text('لا يوجد منظمات'));
+//               } else {
+//                 return SingleChildScrollView(
+//                   child: Column(
+//                     children: snapshot.data!.map((e) => OrganizationCard(organization: e)).toList(),
+//                   ),
+//                 );
+//               }
+//             }),
+//       ),
+//     );
+//   }
 
-  Future getOrganizations() async {
-    Future.delayed(const Duration(seconds: 2), () {}).then((value) => null);
-  }
-}
+//   Future getOrganizations() async {
+//     Future.delayed(const Duration(seconds: 2), () {}).then((value) => null);
+//   }
+// }

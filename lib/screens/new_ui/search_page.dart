@@ -197,34 +197,6 @@ class _SearchPageState extends State<SearchPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: <Widget>[
-                  ItemCard(
-                    itemName: '10 kg of plastic',
-                    itemPrice: 'FREE',
-                    itemType: 'Plastic',
-                    imageUrl: 'https://im.indiatimes.in/content/2020/Sep/AMP-7_5f72f6303cfdc.jpg',
-                    itemPlace: 'Jeddah',
-                  ),
-                  ItemCard(
-                    itemName: '10 kg of plastic',
-                    itemPrice: 'FREE',
-                    itemType: 'Plastic',
-                    imageUrl: 'https://im.indiatimes.in/content/2020/Sep/AMP-7_5f72f6303cfdc.jpg',
-                    itemPlace: 'Jeddah',
-                  ),
-                  ItemCard(
-                    itemName: '10 kg of plastic',
-                    itemPrice: 'FREE',
-                    itemType: 'Plastic',
-                    imageUrl: 'https://im.indiatimes.in/content/2020/Sep/AMP-7_5f72f6303cfdc.jpg',
-                    itemPlace: 'Jeddah',
-                  ),
-                  ItemCard(
-                    itemName: '10 kg of plastic',
-                    itemPrice: 'FREE',
-                    itemType: 'Plastic',
-                    imageUrl: 'https://im.indiatimes.in/content/2020/Sep/AMP-7_5f72f6303cfdc.jpg',
-                    itemPlace: 'Jeddah',
-                  ),
                   // Add more items as needed
                 ],
               ),
@@ -237,31 +209,6 @@ class _SearchPageState extends State<SearchPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: <Widget>[
-                  ItemCard(
-                    itemName: 'iPhone 15 pro',
-                    itemPrice: 'FREE',
-                    itemType: 'Phone',
-                    imageUrl:
-                        'https://cdn-ray.zain.sa/wp-content/uploads/2023/09/iPhone_15_Pro_Max_Natural_Titanium_Pure_Back_iPhone_15_Pro_Max_Natural_Titanium_Pure_Front_2up_Screen__USEN.png',
-                    itemPlace: 'Jeddah',
-                  ),
-
-                  ItemCard(
-                    itemName: 'iPhone 15 pro',
-                    itemPrice: 'FREE',
-                    itemType: 'Phone',
-                    imageUrl:
-                        'https://cdn-ray.zain.sa/wp-content/uploads/2023/09/iPhone_15_Pro_Max_Natural_Titanium_Pure_Back_iPhone_15_Pro_Max_Natural_Titanium_Pure_Front_2up_Screen__USEN.png',
-                    itemPlace: 'Jeddah',
-                  ),
-                  ItemCard(
-                    itemName: 'iPhone 15 pro',
-                    itemPrice: 'FREE',
-                    itemType: 'Phone',
-                    imageUrl:
-                        'https://cdn-ray.zain.sa/wp-content/uploads/2023/09/iPhone_15_Pro_Max_Natural_Titanium_Pure_Back_iPhone_15_Pro_Max_Natural_Titanium_Pure_Front_2up_Screen__USEN.png',
-                    itemPlace: 'Jeddah',
-                  ),
                   // Add more items as needed
                 ],
               ),

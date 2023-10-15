@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/screens/new_ui/on_boarding.dart';
-import 'package:tawwon/screens/old_ui/welcome.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -25,9 +24,9 @@ class MainApp extends StatelessWidget {
           home: const OnBoarding(),
           theme: ThemeData(
               primaryColor: const Color(0xFF213753),
-              scaffoldBackgroundColor: const Color(0xFF213753),
+              scaffoldBackgroundColor: const Color(0xFFF4F5F6),
               visualDensity: VisualDensity.adaptivePlatformDensity,
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white, primary: const Color(0xFF213753)),
+              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white, primary: const Color(0xFFFFFFFF)),
               fontFamily: 'ReadexPro')),
     );
   }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/screens/new_ui/language_page.dart';
+import 'package:tawwon/screens/new_ui/location_page.dart';
+import 'package:tawwon/screens/new_ui/my_items_page.dart';
+import 'package:tawwon/screens/new_ui/notification_page.dart';
+import 'package:tawwon/screens/new_ui/settings_page.dart';
 
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_title.dart';
 import '../../widgets/new_ui/profile_page_list_tile.dart';
-
 
 class ProfilePageRegistered extends StatelessWidget {
   const ProfilePageRegistered({super.key});
@@ -23,13 +27,17 @@ class ProfilePageRegistered extends StatelessWidget {
               ProfilePageListTile(
                 image: 'assets/images/settings.png',
                 title: 'إعدادات',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsPage()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(
                 image: 'assets/images/language.png',
                 title: 'لغة',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LanguagePage()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               const SizedBox(
@@ -39,13 +47,17 @@ class ProfilePageRegistered extends StatelessWidget {
               ProfilePageListTile(
                 title: 'الموقع المفضل',
                 image: 'assets/images/location.png',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LocationPage()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(
                 title: 'الإشعارات',
                 image: 'assets/images/notifications.png',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(
@@ -57,7 +69,9 @@ class ProfilePageRegistered extends StatelessWidget {
               ProfilePageListTile(
                 title: 'اغراضي',
                 image: 'assets/images/items_icon.png',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyItemsPage()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               const SizedBox(

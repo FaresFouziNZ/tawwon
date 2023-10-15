@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/models/donation.dart';
 
 class ItemCard extends StatelessWidget {
-  final String itemName;
-  final String itemPrice;
-  final String itemType;
-  final String imageUrl;
-  final String itemPlace;
+  final Donation donation;
 
-  const ItemCard({
-    super.key,
-    required this.itemName,
-    required this.itemPrice,
-    required this.itemType,
-    required this.imageUrl,
-    required this.itemPlace,
-  });
+  const ItemCard({super.key, required this.donation});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +23,7 @@ class ItemCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7.0),
                   image: DecorationImage(
-                    image: NetworkImage(imageUrl), // Replace with your image URL
+                    image: NetworkImage(donation.imageUrl ?? ''), // Replace with your image URL
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,19 +33,19 @@ class ItemCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(0.0),
               child: Text(
-                itemName,
+                donation.name ?? 'No name found',
                 style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             // Item Price
-            Padding(
-              padding: const EdgeInsets.all(3.0),
+            const Padding(
+              padding: EdgeInsets.all(3.0),
               child: Text(
-                itemPrice,
+                'Free',
                 style: TextStyle(
                   fontSize: 16.0,
-                  fontWeight: itemPrice == 'FREE' ? FontWeight.bold : FontWeight.normal,
-                  color: itemPrice == 'FREE' ? Colors.red : Colors.white,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
                 ),
               ),
             ),
@@ -71,7 +61,7 @@ class ItemCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(1.0),
                       child: Text(
-                        itemPlace,
+                        donation.location ?? 'No location found',
                         style: const TextStyle(
                           fontSize: 16.0,
                           color: Colors.white,
@@ -86,7 +76,7 @@ class ItemCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(1),
                       child: Text(
-                        itemType,
+                        donation.category ?? 'No category found',
                         style: const TextStyle(
                           fontSize: 16.0,
                           color: Colors.white,

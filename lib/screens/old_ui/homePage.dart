@@ -50,12 +50,12 @@ class HomePage extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SelectOrganizationView(
-                                  type: 'plastic',
-                                )));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const SelectOrganizationView(
+                    //               type: 'plastic',
+                    //             )));
                   },
                   icon: const Icon(
                     Icons.local_drink,
@@ -123,7 +123,7 @@ class HomePage extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RequestsView()));
+                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RequestsView()));
                   },
                   icon: const Icon(
                     Icons.message,
@@ -137,8 +137,8 @@ class HomePage extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => const OrganizationPage()));
+                    // Navigator.pushReplacement(
+                    //     context, MaterialPageRoute(builder: (context) => const OrganizationPage()));
                   },
                   icon: const Icon(
                     Icons.person,
