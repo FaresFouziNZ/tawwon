@@ -17,14 +17,14 @@ class ItemCard extends StatelessWidget {
             // Item Photo (50% of the card)
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: Container(  
                 height: 100.0,
                 width: 140,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7.0),
+                  borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
                     image: NetworkImage(donation.imageUrl ?? ''), // Replace with your image URL
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
