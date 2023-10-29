@@ -142,12 +142,11 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             const Padding(
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
-              child: Text('مشاهد سابقا', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
             FutureBuilder(
               future: DatabaseService().getDonations(),
               builder: (context, snapshot) {
-                print('Im rich');
                 if (snapshot.hasData) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.end,
