@@ -4,7 +4,7 @@ class CustomSmallButton extends StatelessWidget {
   String text;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       child: Container(
        width: 114,
   height: 40,

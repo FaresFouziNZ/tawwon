@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/screens/new_ui/new_donate.dart';
+import 'package:tawwon/screens/new_ui/registeration_page.dart';
 import 'package:tawwon/widgets/new_ui/item_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,9 +26,10 @@ class HomePage extends StatelessWidget {
           )),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 12, right: 20),
+              padding: const EdgeInsets.only(top: 30, bottom: 12, right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -42,86 +44,90 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    child: Container(
-                      width: 120,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF039C8A),
-                        borderRadius: BorderRadius.circular(5),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: Container(
+                        width: 120,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF039C8A),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('إقتراحاتنا', style: TextStyle(color: Colors.white, fontSize: 18)),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('إقتراحاتنا', style: TextStyle(color: Colors.white, fontSize: 18)),
-                          ),
-                        ],
-                      ),
+                      onTap: () {
+                      },
                     ),
-                    onTap: () {},
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    child: Container(
-                      width: 120,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0484D9),
-                        borderRadius: BorderRadius.circular(5),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: Container(
+                        width: 120,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0484D9),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('أضيف غرض', style: TextStyle(color: Colors.white, fontSize: 18)),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('أضيف غرض', style: TextStyle(color: Colors.white, fontSize: 18)),
-                          ),
-                        ],
-                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const NewDonatePage()));
+                      },
                     ),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const NewDonatePage()));
-                    },
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    child: Container(
-                      width: 120,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFEE3985),
-                        borderRadius: BorderRadius.circular(5),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: Container(
+                        width: 120,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEE3985),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('جديد', style: TextStyle(color: Colors.white, fontSize: 18)),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('جديد', style: TextStyle(color: Colors.white, fontSize: 18)),
-                          ),
-                        ],
-                      ),
+                      onTap: () {},
                     ),
-                    onTap: () {},
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             const Padding(
-              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
-              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+              padding: EdgeInsets.fromLTRB(0, 0, 15, 4),
+              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro', )),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
