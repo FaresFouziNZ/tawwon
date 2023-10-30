@@ -147,29 +147,25 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 15, 4),
-              child: Text('مشاهد سابقا', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
+              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: FutureBuilder(
-                future: DatabaseService().getDonations(),
-                builder: (context, snapshot) {
-                  print('Im rich');
-                  if (snapshot.hasData) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: snapshot.data
-                              ?.map((e) => ItemCard(
-                                    donation: e,
-                                  ))
-                              .toList() ??
-                          [],
-                    );
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                },
-              ),
+            FutureBuilder(
+              future: DatabaseService().getDonations(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: snapshot.data
+                            ?.map((e) => ItemCard(
+                                  donation: e,
+                                ))
+                            .toList() ??
+                        [],
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
             )
           ],
         ),
