@@ -100,4 +100,8 @@ class DatabaseService {
     donation.imageUrl = await uploaded.ref.getDownloadURL();
     return await collections.donates.add(donation.toMap());
   }
+
+  Future getWishListByID({required String id}) {
+    return collections.wishlist.where('id', isEqualTo: id).get();
+  }
 }

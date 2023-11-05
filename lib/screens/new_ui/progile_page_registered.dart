@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/screens/new_ui/language_page.dart';
 import 'package:tawwon/screens/new_ui/location_page.dart';
 import 'package:tawwon/screens/new_ui/my_items_page.dart';
@@ -90,6 +91,25 @@ class ProfilePageRegistered extends StatelessWidget {
                 onTap: () {},
               ),
               CustomHorizontalDivider(height: 2.5),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Auth().signOut();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  child: const Text('تسجيل الخروج'),
+                ),
+              )
             ],
           ),
         ),

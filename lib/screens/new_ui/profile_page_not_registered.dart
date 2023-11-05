@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/screens/new_ui/signup.dart';
 
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_small_button.dart';
@@ -47,7 +48,12 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    CustomSmallButton(text: 'سجل معانا'),
+                    GestureDetector(
+                      child: CustomSmallButton(text: 'سجل معانا'),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
+                      },
+                    ),
                   ],
                 ),
               ),
