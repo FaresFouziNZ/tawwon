@@ -3,6 +3,7 @@ import 'package:tawwon/screens/new_ui/language_page.dart';
 import 'package:tawwon/screens/new_ui/location_page.dart';
 import 'package:tawwon/screens/new_ui/my_items_page.dart';
 import 'package:tawwon/screens/new_ui/notification_page.dart';
+import 'package:tawwon/screens/new_ui/profile_settings.dart';
 import 'package:tawwon/screens/new_ui/settings_page.dart';
 
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
@@ -63,7 +64,9 @@ class ProfilePageRegistered extends StatelessWidget {
               ProfilePageListTile(
                 title: 'الحساب',
                 image: 'assets/images/account_icon.png',
-                onTap: () {},
+                onTap: () {
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSettings()));
+                },
               ),
               CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(

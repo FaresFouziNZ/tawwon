@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/screens/new_ui/new_donate.dart';
-import 'package:tawwon/screens/new_ui/registeration_page.dart';
 import 'package:tawwon/widgets/new_ui/item_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -150,22 +149,25 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
               child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
-            FutureBuilder(
-              future: DatabaseService().getDonations(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: snapshot.data
-                            ?.map((e) => ItemCard(
-                                  donation: e,
-                                ))
-                            .toList() ??
-                        [],
-                  );
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: FutureBuilder(
+                future: DatabaseService().getDonations(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: snapshot.data
+                              ?.map((e) => ItemCard(
+                                    donation: e,
+                                  ))
+                              .toList() ??
+                          [],
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             )
           ],
         ),
