@@ -135,6 +135,7 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
               child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
+
             FutureBuilder(
               future: DatabaseService().getDonations(),
               builder: (context, snapshot) {
@@ -171,6 +172,7 @@ class HomePage extends StatelessWidget {
                   ),
                 )
               ],
+
             )
           ],
         ),

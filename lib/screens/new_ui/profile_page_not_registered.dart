@@ -14,6 +14,7 @@ class ProfilePageNotRegistered extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F5F6),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           margin: const EdgeInsets.only(top: 70, left: 25, right: 25),
           child: Column(
