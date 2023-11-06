@@ -101,7 +101,9 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 20,
               ),
-              CustomSmallButton(text: "التالي", page: const HomePage())
+              CustomSmallButton(text: "التالي", onTap:  Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) => const HomePage()))
+                                    , color: Colors.blue,)
             ],
           ),
         ),

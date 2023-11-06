@@ -52,14 +52,18 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     ),
                     CustomSmallButton(
                       text: 'سجل معنا',
-                      page:  PreSignup(),
+                      onTap:  Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) =>  PreSignup()))
+                                    , color: Colors.blue,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     CustomSmallButton(
                       text: 'تسجيل دخول',
-                      page: LoginPage(),
+                      onTap:  Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) =>  PreSignup()))
+                                    , color: Colors.blue,
                     )
                   ],
                 ),
