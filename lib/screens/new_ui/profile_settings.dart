@@ -12,6 +12,11 @@ class ProfileSettings extends StatefulWidget {
 }
 
 class _ProfileSettingsState extends State<ProfileSettings> {
+  bool showEmailTextField = false;
+  bool showPasswordTextField = false;
+  bool showAccountInfoTextField = false;
+  bool showDeleteAccountField = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +34,23 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Row(
                   textDirection: TextDirection.rtl,
                   children: [
                     IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Image.asset('assets/images/back_arrow_white.png')),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Image.asset('assets/images/back_arrow_white.png'),
+                    ),
                     Image.asset(
                       'assets/images/profile_white.png',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
-                    Text(
+                    const Text(
                       "حساب",
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -53,23 +59,66 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w500,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ProfilePageListTile(
-                  title: "تغيير الإيميل",
-                  image: 'assets/images/edit.png',
-                  onTap: () {
-                    //TODO change email and send data to firebase (See figma)
-                  }),
+                title: "تغيير الإيميل",
+                image: 'assets/images/edit.png',
+                onTap: () {
+                  setState(() {
+                    showEmailTextField = !showEmailTextField;
+                  });
+                },
+              ),
             ),
+            if (showEmailTextField)
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "الإيميل",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "أكد كلمة المرور",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -77,14 +126,73 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ProfilePageListTile(
-                  title: "تغيير كلمة السر",
-                  image: 'assets/images/edit.png',
-                  onTap: () {
-                    //TODO change password and send data to firebase (See figma)
-                  }),
+                title: "تغيير كلمة السر",
+                image: 'assets/images/edit.png',
+                onTap: () {
+                  setState(() {
+                    showPasswordTextField = !showPasswordTextField;
+                  });
+                },
+              ),
             ),
+            if (showPasswordTextField)
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "كلمة المرور القديمة",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "كلمة المرور الجديدة",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "أكد كلمة المرور الجديدة",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -92,14 +200,56 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ProfilePageListTile(
-                  title: "تعديل معلومات الحساب",
-                  image: 'assets/images/edit.png',
-                  onTap: () {
-                    //TODO user should be able to change name and phone number and then send data to firebase (See figma)
-                  }),
+                title: "تعديل معلومات الحساب",
+                image: 'assets/images/edit.png',
+                onTap: () {
+                  setState(() {
+                    showAccountInfoTextField = !showAccountInfoTextField;
+                  });
+                },
+              ),
             ),
+            if (showAccountInfoTextField)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "الاسم",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "رقم التواصل",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -107,14 +257,54 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ProfilePageListTile(
-                  title: "حذف الحساب",
-                  image: 'assets/images/delete.png',
-                  onTap: () {
-                    //TODO delete account from firebase and logout (See figma and use the custom small button widget)
-                  }),
+                title: "حذف الحساب",
+                image: 'assets/images/delete.png',
+                onTap: () {
+                  setState(() {
+                    showDeleteAccountField = !showDeleteAccountField;
+                  });
+                },
+              ),
             ),
+            if (showDeleteAccountField)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          hintText: "كلمة السر الحالية",
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0, color: Colors.white)),
+                          filled: true,
+                          fillColor: const Color(0x6645474A)
+                              .withOpacity(0.07999999821186066),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: 30,
+                          bottom: 10,
+                          right:
+                              ((MediaQuery.of(context).size.width) / 2) + 30),
+                      child: CustomSmallButton(
+                        text: "حذف الحساب",
+                        color: const Color(0xFFE13153),
+                        onTap: () {
+                          //TODO show a dialog screen to confirm this option
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -122,13 +312,18 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 340),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: CustomSmallButton(text: "تطبيق", onTap: (){
+              padding: EdgeInsets.only(
+                  top: 330,
+                  bottom: 15,
+                  right: ((MediaQuery.of(context).size.width) / 2) + 30),
+              child: CustomSmallButton(
+                text: "تطبيق",
+                onTap: () {
                   //TODO commit changes
-                }, color: Color(0xFF213753),)),
-            )
+                },
+                color: const Color(0xFF213753),
+              ),
+            ),
           ],
         ),
       ),
