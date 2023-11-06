@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:tawwon/screens/new_ui/signup.dart';
+=======
+import 'package:tawwon/screens/new_ui/login.dart';
+>>>>>>> Stashed changes
 
+import 'pre_signup.dart';
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_small_button.dart';
 import '../../widgets/new_ui/profile_page_list_tile.dart';
@@ -48,12 +53,26 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+<<<<<<< Updated upstream
                     GestureDetector(
                       child: CustomSmallButton(text: 'سجل معانا'),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
                       },
                     ),
+=======
+                    CustomSmallButton(
+                      text: 'سجل معنا',
+                      page:  PreSignup(),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomSmallButton(
+                      text: 'تسجيل دخول',
+                      page: LoginPage(),
+                    )
+>>>>>>> Stashed changes
                   ],
                 ),
               ),

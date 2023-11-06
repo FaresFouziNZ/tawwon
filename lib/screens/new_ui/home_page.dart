@@ -11,7 +11,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
+          title: const Center(
+            child: Text(
+              'الرئيسية',
+              style: TextStyle(fontFamily: 'ReadexPro', color: Color.fromARGB(255, 33, 55, 83)),
+            ),
+          ),
+          //elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
             child: Container(
@@ -125,6 +131,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+<<<<<<< Updated upstream
             const Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 15, 4),
               child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro', )),
@@ -145,6 +152,8 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
+=======
+>>>>>>> Stashed changes
             const SizedBox(height: 20),
             const Padding(
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
@@ -166,6 +175,26 @@ class HomePage extends StatelessWidget {
                 }
                 return const Center(child: CircularProgressIndicator());
               },
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
+              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0484D9),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                )
+              ],
             )
           ],
         ),

@@ -22,6 +22,9 @@ class DatabaseService {
   Future createUser({required LocalUser user}) async {
     return await collections.users.doc(user.uid).set(user.toMap(), SetOptions(merge: true));
   }
+  Future updateUser({required LocalUser user}) async {
+    return await collections.users.doc(user.uid).update(user.toMap());
+  }
 
   // Future createOrganization({required Organization organization}) {
   //   return collections.organizations.doc(organization.uid).set(organization.toMap(), SetOptions(merge: true));
