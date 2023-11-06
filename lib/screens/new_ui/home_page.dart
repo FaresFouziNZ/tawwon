@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/screens/new_ui/new_donate.dart';
-import 'package:tawwon/screens/new_ui/registeration_page.dart';
 import 'package:tawwon/widgets/new_ui/item_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -131,34 +130,13 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-<<<<<<< Updated upstream
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 15, 4),
-              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro', )),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0484D9),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
-                )
-              ],
-            ),
-=======
->>>>>>> Stashed changes
+
             const SizedBox(height: 20),
             const Padding(
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
               child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
+
             FutureBuilder(
               future: DatabaseService().getDonations(),
               builder: (context, snapshot) {
@@ -195,6 +173,7 @@ class HomePage extends StatelessWidget {
                   ),
                 )
               ],
+
             )
           ],
         ),

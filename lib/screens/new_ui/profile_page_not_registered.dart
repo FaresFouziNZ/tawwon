@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
 import 'package:tawwon/screens/new_ui/signup.dart';
-=======
+
 import 'package:tawwon/screens/new_ui/login.dart';
->>>>>>> Stashed changes
 
 import 'pre_signup.dart';
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
@@ -18,6 +16,7 @@ class ProfilePageNotRegistered extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F5F6),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           margin: const EdgeInsets.only(top: 70, left: 25, right: 25),
           child: Column(
@@ -53,14 +52,14 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-<<<<<<< Updated upstream
+
                     GestureDetector(
                       child: CustomSmallButton(text: 'سجل معانا'),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
                       },
                     ),
-=======
+
                     CustomSmallButton(
                       text: 'سجل معنا',
                       page:  PreSignup(),
@@ -71,8 +70,7 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     CustomSmallButton(
                       text: 'تسجيل دخول',
                       page: LoginPage(),
-                    )
->>>>>>> Stashed changes
+
                   ],
                 ),
               ),
