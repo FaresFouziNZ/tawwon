@@ -10,7 +10,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
+          title: const Center(
+            child: Text(
+              'الرئيسية',
+              style: TextStyle(fontFamily: 'ReadexPro', color: Color.fromARGB(255, 33, 55, 83)),
+            ),
+          ),
+          //elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
             child: Container(
@@ -124,9 +130,33 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
+            const SizedBox(height: 20),
             const Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 15, 4),
-              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro', )),
+              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
+              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+            ),
+
+            FutureBuilder(
+              future: DatabaseService().getDonations(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: snapshot.data
+                            ?.map((e) => ItemCard(
+                                  donation: e,
+                                ))
+                            .toList() ??
+                        [],
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
+              child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -143,31 +173,7 @@ class HomePage extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-            const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
-              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: FutureBuilder(
-                future: DatabaseService().getDonations(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: snapshot.data
-                              ?.map((e) => ItemCard(
-                                    donation: e,
-                                  ))
-                              .toList() ??
-                          [],
-                    );
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                },
-              ),
+
             )
           ],
         ),

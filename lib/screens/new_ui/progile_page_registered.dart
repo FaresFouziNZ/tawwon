@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/screens/new_ui/language_page.dart';
 import 'package:tawwon/screens/new_ui/location_page.dart';
 import 'package:tawwon/screens/new_ui/my_items_page.dart';
@@ -9,6 +12,7 @@ import 'package:tawwon/screens/new_ui/settings_page.dart';
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_title.dart';
 import '../../widgets/new_ui/profile_page_list_tile.dart';
+import 'home_page.dart';
 
 class ProfilePageRegistered extends StatelessWidget {
   const ProfilePageRegistered({super.key});
@@ -93,6 +97,41 @@ class ProfilePageRegistered extends StatelessWidget {
                 onTap: () {},
               ),
               CustomHorizontalDivider(height: 2.5),
+<<<<<<< Updated upstream
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Auth().signOut();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  child: const Text('تسجيل الخروج'),
+                ),
+              )
+=======
+              ProfilePageListTile(
+                image: 'assets/images/logout.png',
+                title: 'تسجيل خروج',
+                onTap: () {
+                  //FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
+              ),
+>>>>>>> Stashed changes
             ],
           ),
         ),
