@@ -94,27 +94,6 @@ class ProfilePageRegistered extends StatelessWidget {
                 onTap: () {},
               ),
               CustomHorizontalDivider(height: 2.5),
-<<<<<<< Updated upstream
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Auth().signOut();
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
-                    shape: MaterialStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                  child: const Text('تسجيل الخروج'),
-                ),
-              )
-=======
               ProfilePageListTile(
                 image: 'assets/images/logout.png',
                 title: 'تسجيل خروج',
@@ -128,7 +107,6 @@ class ProfilePageRegistered extends StatelessWidget {
                   );
                 },
               ),
->>>>>>> Stashed changes
             ],
           ),
         ),
