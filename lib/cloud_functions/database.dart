@@ -107,4 +107,26 @@ class DatabaseService {
   Future getWishListByID({required String id}) {
     return collections.wishlist.where('id', isEqualTo: id).get();
   }
+
+  Future searchResults({required String query}) {
+    return collections.donates.where('name', isEqualTo: query).get();
+  }
+
+  Future getDonationByID({required String id}) {
+    return collections.donates.where('id', isEqualTo: id).get();
+  }
+
+  Future getDonationByCategory({required String category}) {
+    return collections.donates.where('category', isEqualTo: category).get();
+  }
+
+  Future getDonationByType({required String type}) {
+    return collections.donates.where('type', isEqualTo: type).get();
+  }
+
+  Future getDonationByCity({required String city}) {
+    return collections.donates.where('city', isEqualTo: city).get();
+  }
+
+  
 }
