@@ -77,14 +77,12 @@ class PreSignup extends StatelessWidget {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.popUntil(context, (route) => route.isFirst);
                                       Navigator.pushReplacement(
                                           context, MaterialPageRoute(builder: (context) => const SignUp()));
                                     },
                                     child: const Text('التالي'))
                               ],
                             ));
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUp()));
                   }
                 } else {}
               },
