@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/screens/new_ui/login.dart';
-
 import 'pre_signup.dart';
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_small_button.dart';
@@ -52,18 +51,20 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     ),
                     CustomSmallButton(
                       text: 'سجل معنا',
-                      onTap:  Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) =>  PreSignup()))
-                                    , color: Colors.blue,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PreSignup()));
+                      },
+                      color: const Color(0xFF213753),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     CustomSmallButton(
                       text: 'تسجيل دخول',
-                      onTap:  Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) =>  PreSignup()))
-                                    , color: Colors.blue,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                      },
+                      color: const Color(0xFF213753),
                     )
                   ],
                 ),

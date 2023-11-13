@@ -69,7 +69,7 @@ class ProfilePageRegistered extends StatelessWidget {
                 title: 'الحساب',
                 image: 'assets/images/account_icon.png',
                 onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSettings()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSettings()));
                 },
               ),
               CustomHorizontalDivider(height: 2.5),
@@ -98,16 +98,10 @@ class ProfilePageRegistered extends StatelessWidget {
               ),
               CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(
-                image: 'assets/images/logout.png',
-                title: 'تسجيل خروج',
+                image: 'assets/images/contact_us.png',
+                title: 'تسجيل الخروج',
                 onTap: () {
-                  //FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
+                  Auth().signOut();
                 },
               ),
             ],

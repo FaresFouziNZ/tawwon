@@ -18,12 +18,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
-
-    // Create a reference to the collection where you want to store the data
-
-    
-
- 
+  // Create a reference to the collection where you want to store the data
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +96,13 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 20,
               ),
-              CustomSmallButton(text: "التالي", onTap:  Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) => const HomePage()))
-                                    , color: Colors.blue,)
+              CustomSmallButton(
+                text: "التالي",
+                onTap: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                },
+                color: const Color(0xFF213753),
+              )
             ],
           ),
         ),
