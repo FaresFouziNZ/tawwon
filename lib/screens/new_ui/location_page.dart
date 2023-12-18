@@ -10,17 +10,6 @@ class LocationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-            elevation: 0,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(4.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                ),
-                height: 0.4,
-              ),
-            )),
         body: Container(
           margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
           child: Column(
@@ -48,9 +37,9 @@ class LocationPage extends StatelessWidget {
                 ),
               ),
               ProfilePageListTile(title: 'تغيير البريد الالكتروني', image: 'assets/images/settings.png', onTap: () {}),
-              CustomHorizontalDivider(height: 2.5),
+              const CustomHorizontalDivider(height: 2.5),
               ProfilePageListTile(title: 'حذف الحساب', image: 'assets/images/settings.png', onTap: () {}),
-              CustomHorizontalDivider(height: 2.5),
+              const CustomHorizontalDivider(height: 2.5),
             ],
           ),
         ));

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tawwon/models/favorite_provider.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/widgets/new_ui/item_card.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -6,11 +9,13 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
+    final fav = Provider.of<FavoriteProvider>(context);
     return Scaffold(
         appBar: AppBar(),
-        body: const Column(
+        body: Column(
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(right: 20, top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -26,26 +31,26 @@ class FavoritePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-
-              ],
-            ),
-            Spacer(),
-            Padding(
-              padding: EdgeInsets.fromLTRB(270, 0, 20, 10),
-              child: Text('مشاهد سابقا', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-
-              ],
-            )
+            user.uid == null
+                ? const Text('لم تسجل دخولك بعد')
+                : Wrap(
+                    children: fav.favoriteList
+                        .map((e) => ItemCard(
+                              donation: e,
+                            ))
+                        .toList()),
+            // Spacer(),
+            // Padding(
+            //   padding: EdgeInsets.fromLTRB(270, 0, 20, 10),
+            //   child: Text('مشاهد سابقا', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [],
+            // )
           ],
         ));
   }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/screens/new_ui/signup.dart';
-import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
-import 'package:tawwon/models/local_user.dart';
+
 
 class PreSignup extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -13,8 +12,6 @@ class PreSignup extends StatelessWidget {
   Widget build(BuildContext context) {
     final email = TextEditingController();
     final password = TextEditingController();
-    final passwordConfirm = TextEditingController();
-    final user = Provider.of<LocalUser?>(context);
     final auth = Auth();
     return Scaffold(
       body: Container(

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/database.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/new_ui/new_donate.dart';
+import 'package:tawwon/screens/new_ui/news.dart';
+import 'package:tawwon/screens/new_ui/sugeestions_page.dart';
 import 'package:tawwon/widgets/new_ui/item_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
     return Scaffold(
       appBar: AppBar(
           title: const Center(
@@ -75,6 +81,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => const SuggestedDonationsPage()));
                       },
                     ),
                   ),
@@ -99,6 +107,21 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        if (user.uid == null) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                      title: const Text('يجب تسجيل الدخول اولاً'),
+                                      content: const Text('يجب تسجيل الدخول اولاً لاضافة اعلان '),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('حسناً'))
+                                      ]));
+                          return;
+                        }
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const NewDonatePage()));
                       },
                     ),
@@ -123,36 +146,15 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const NewDonationsPage()));
+                      },
                     ),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
-              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
-            ),
-
-            FutureBuilder(
-              future: DatabaseService().getDonations(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: snapshot.data
-                            ?.map((e) => ItemCard(
-                                  donation: e,
-                                ))
-                            .toList() ??
-                        [],
-                  );
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
-            ),
             const Padding(
               padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
               child: Text('عروض ترويجية', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
@@ -162,18 +164,51 @@ class HomePage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0484D9),
-                      borderRadius: BorderRadius.circular(5),
+                  child: GestureDetector(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        // color: const Color(0xFF0484D9),
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/ad.jpeg'),
+                          fit: BoxFit.fill,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
                     ),
+                    onTap: () {
+                      launchUrl(Uri.parse('https://t.co/hEAyMdunC4'));
+                    },
                   ),
                 )
               ],
-
-            )
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(270, 0, 4, 4),
+              child: Text('نظرة سريعة', style: TextStyle(fontSize: 20, fontFamily: 'ReadexPro')),
+            ),
+            FutureBuilder(
+              future: DatabaseService().getDonations(uid: user.uid),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: snapshot.data
+                              ?.map((e) => ItemCard(
+                                    donation: e,
+                                  ))
+                              .toList() ??
+                          [],
+                    ),
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tawwon/models/donation.dart';
 import 'package:tawwon/models/local_user.dart';
+import 'package:tawwon/models/wishlist.dart';
 
 import 'firebase_collections.dart';
 
@@ -22,70 +23,23 @@ class DatabaseService {
   Future createUser({required LocalUser user}) async {
     return await collections.users.doc(user.uid).set(user.toMap(), SetOptions(merge: true));
   }
+
   Future updateUser({required LocalUser user}) async {
-    return await collections.users.doc(user.uid).update(user.toMap());
+    return await collections.users.doc(user.uid).set(user.toMap(), SetOptions(merge: true));
   }
 
-  // Future createOrganization({required Organization organization}) {
-  //   return collections.organizations.doc(organization.uid).set(organization.toMap(), SetOptions(merge: true));
-  // }
+  Future<LocalUser> getUser({String? uid}) async {
+    return await collections.users
+        .doc(uid)
+        .get()
+        .then((value) => LocalUser.fromMap(value.data() as Map<String, dynamic>));
+  }
 
-  // Future createRequest({required Request request}) async {
-  //   return await collections.requests.add(request.toMap());
-  // }
-
-  // Future<Organization> getOrganizationDetails({required String? uid}) async {
-  //   return await collections.organizations.doc(uid).get().then((value) {
-  //     print('a');
-  //     if (value.data() == null) {
-  //       return collections.organizations.where('uid', isEqualTo: uid).get().then((value) {
-  //         print('b');
-  //         if (value.docs.isEmpty) {
-  //           return Organization(description: '', name: '', uid: '', logoUrl: '', time: '', types: []);
-  //         }
-  //         return Organization.fromMap(value.docs.first.data() as Map<String, dynamic>);
-  //       });
-  //     }
-  //     // var x = value.data();
-  //     // print(x);
-  //     return Organization.fromMap(value.data() as Map<String, dynamic>);
-  //   });
-  // }
-
-  // Future<Organization> getOrganizationByName({required String? name}) async {
-  //   return await collections.organizations
-  //       .where('name', isEqualTo: name)
-  //       .get()
-  //       .then((value) => Organization.fromMap(value.docs.first.data() as Map<String, dynamic>));
-  // }
-
-  // Future<List<Organization>> getOrganizations() {
-  //   return collections.organizations.get().then((value) {
-  //     return value.docs.map((e) => Organization.fromMap(e.data() as Map<String, dynamic>)).toList();
-  //   });
-  // }
-
-  // Future<List<Request>> getRequestsByUid({required String? uid}) async {
-  //   if (uid == null) {
-  //     return [];
-  //   }
-  //   List<Request> requests = [];
-  //   var x = await collections.requests
-  //       .where('donorID', isEqualTo: uid)
-  //       .get()
-  //       .then((value) => value.docs.map((e) => Request.fromMap(e.data() as Map<String, dynamic>)).toList());
-  //   requests.addAll(x);
-  //   x = await collections.requests
-  //       .where('organizationID', isEqualTo: uid)
-  //       .get()
-  //       .then((value) => value.docs.map((e) => Request.fromMap(e.data() as Map<String, dynamic>)).toList());
-  //   requests.addAll(x);
-  //   return requests;
-  // }
-
-  Future<List<Donation>> getDonations() async {
+  Future<List<Donation>> getDonations({String? uid}) async {
     List<Donation> donations = [];
     var x = await collections.donates
+        .where('donorID', isNotEqualTo: uid)
+        .where('isConcluded', isEqualTo: false)
         .get()
         .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
     donations.addAll(x);
@@ -101,32 +55,106 @@ class DatabaseService {
   Future createDonation({required Donation donation, required File file}) async {
     TaskSnapshot uploaded = await uploadPicture(file: file);
     donation.imageUrl = await uploaded.ref.getDownloadURL();
-    return await collections.donates.add(donation.toMap());
+    return await collections.donates.add(donation.toMap()).then((value) async {
+      await collections.donates.doc(value.id).update({'id': value.id});
+    });
   }
 
-  Future getWishListByID({required String id}) {
-    return collections.wishlist.where('id', isEqualTo: id).get();
+  Future<List<Donation>> getDonationsFilteredByCategory({required String filter, String? userId}) async {
+    List<Donation> donations = [];
+    var x = await collections.donates
+        .where('category', isEqualTo: filter)
+        .where('isConcluded', isEqualTo: false)
+        .where('donorID', isNotEqualTo: userId)
+        .get()
+        .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
+    donations.addAll(x);
+    return donations;
+  }
+
+  Future<List<Donation>> getDonationsSearch({required String searchQuery, String? uid}) async {
+    return await collections.donates
+        .where('name', isGreaterThanOrEqualTo: searchQuery)
+        .where('name', isLessThan: '$searchQuery\uf8ff')
+        .where('isConcluded', isEqualTo: false)
+        // .where('donorID', isNotEqualTo: uid)
+        .get()
+        .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
+  }
+
+  Future<List<Donation>> getWishListOfUser({String? userId}) async {
+    final x = await collections.wishlist.doc(userId).get();
+
+    WishList wishList = WishList.fromMap(x.data() as Map<String, dynamic>);
+    List<Donation> donations = [];
+    for (var i = 0; i < wishList.items.length; i++) {
+      var x = await collections.donates.doc(wishList.items[i]).get();
+      donations.add(Donation.fromMap(x.data() as Map<String, dynamic>));
+    }
+    return donations;
+  }
+
+  Future addItemToWhishList({String? id, String? itemId}) {
+    return collections.wishlist.doc(id).set({
+      'items': FieldValue.arrayUnion([itemId])
+    }, SetOptions(merge: true));
   }
 
   Future searchResults({required String query}) {
     return collections.donates.where('name', isEqualTo: query).get();
   }
 
-  Future getDonationByID({required String id}) {
-    return collections.donates.where('id', isEqualTo: id).get();
+  Future<List<Donation>> getUserItems({String? uid}) async {
+    List<Donation> donations = [];
+    var x = await collections.donates
+        .where('donorID', isEqualTo: uid)
+        .get()
+        .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
+    donations.addAll(x);
+    return donations;
   }
 
-  Future getDonationByCategory({required String category}) {
-    return collections.donates.where('category', isEqualTo: category).get();
+  Future deleteItem({String? itemId}) async {
+    await collections.wishlist.get().then((value) {
+      value.docs.forEach((element) async {
+        await collections.wishlist.doc(element.id).update({
+          'items': FieldValue.arrayRemove([itemId])
+        });
+      });
+    });
+    return await collections.donates.doc(itemId).delete();
   }
 
-  Future getDonationByType({required String type}) {
-    return collections.donates.where('type', isEqualTo: type).get();
+  Future deleteItemFromWishList({String? itemId, String? userId}) async {
+    return await collections.wishlist.doc(userId).update({
+      'items': FieldValue.arrayRemove([itemId])
+    });
   }
 
-  Future getDonationByCity({required String city}) {
-    return collections.donates.where('city', isEqualTo: city).get();
+  Future<List<Donation>> getNewDonations({String? uid}) async {
+    List<Donation> donations = [];
+    var x = await collections.donates
+        .where('createdAt',
+            isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)).millisecondsSinceEpoch)
+        .where('isConcluded', isEqualTo: false)
+        .get()
+        .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
+    for (var i = 0; i < x.length; i++) {
+      if (x[i].donorID != uid) {
+        donations.add(x[i]);
+      }
+    }
+    return donations;
   }
 
-  
+  Future<List<Donation>> getDonationsForUser({String? uid}) async {
+    List<Donation> donations = [];
+    var x = await collections.donates
+        .where('donorID', isEqualTo: uid)
+        .where('isConcluded', isEqualTo: false)
+        .get()
+        .then((value) => value.docs.map((e) => Donation.fromMap(e.data() as Map<String, dynamic>)).toList());
+    donations.addAll(x);
+    return donations;
+  }
 }

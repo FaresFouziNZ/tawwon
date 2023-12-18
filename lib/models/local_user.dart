@@ -2,24 +2,27 @@ class LocalUser {
   // Basic user
   String? uid;
   String? displayName;
+  String? number = '';
 
   LocalUser({
     required this.uid,
-     this.displayName,
+    this.displayName,
+    this.number,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
       'displayName': displayName,
+      'number': number,
     };
   }
 
   factory LocalUser.fromMap(Map<String, dynamic> map) {
-    if (map == null) return LocalUser(uid: '', displayName: '');
     return LocalUser(
       uid: map['uid'],
       displayName: map['displayName'],
+      number: map['number'],
     );
   }
 }

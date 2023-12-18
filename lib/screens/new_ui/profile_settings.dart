@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tawwon/cloud_functions/Auth.dart';
 import 'package:tawwon/widgets/new_ui/custom_divider_horizontal.dart';
 import 'package:tawwon/widgets/new_ui/custom_small_button.dart';
 
@@ -16,6 +17,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   bool showPasswordTextField = false;
   bool showAccountInfoTextField = false;
   bool showDeleteAccountField = false;
+  final newEmailController = TextEditingController();
+  final newEmailController2 = TextEditingController();
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ProfilePageListTile(
-                title: "تغيير الإيميل",
+                title: "تغيير البريد الالكتروني",
                 image: 'assets/images/edit.png',
                 onTap: () {
                   setState(() {
@@ -81,22 +85,20 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             ),
             if (showEmailTextField)
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 50,
                       child: TextFormField(
+                        controller: newEmailController,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
-                          hintText: "الإيميل",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          hintText: "البريد الالكتروني الجديد",
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
@@ -104,22 +106,53 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       width: MediaQuery.of(context).size.width - 50,
                       child: TextFormField(
+                        controller: newEmailController2,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
-                          hintText: "أكد كلمة المرور",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          hintText: "أكد البريد الالكتروني الجديد",
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final regrex = RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]');
+                        if (newEmailController.text.isNotEmpty) {
+                          if (regrex.hasMatch(newEmailController.text)) {
+                            if (newEmailController.text == newEmailController2.text) {
+                              //TODO commit changes
+                              final result = await auth.changeEmail(newEmailController.text);
+                              if (result == true) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => const Text("تم تغيير البريد الالكتروني بنجاح"),
+                                );
+                              }
+                            } else {
+                              //TODO show error
+                            }
+                          } else {
+                            //TODO show error
+                          }
+                        } else {
+                          //TODO show error
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF213753),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: const Text("تغيير"),
+                    )
                   ],
                 ),
               ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomHorizontalDivider(height: 2),
@@ -139,8 +172,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             ),
             if (showPasswordTextField)
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
                   children: [
                     SizedBox(
@@ -149,12 +181,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "كلمة المرور القديمة",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
@@ -165,12 +195,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "كلمة المرور الجديدة",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
@@ -181,19 +209,17 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "أكد كلمة المرور الجديدة",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomHorizontalDivider(height: 2),
@@ -222,12 +248,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "الاسم",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
@@ -238,19 +262,17 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "رقم التواصل",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomHorizontalDivider(height: 2),
@@ -279,21 +301,16 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           hintText: "كلمة السر الحالية",
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 0, color: Colors.white)),
+                          enabledBorder:
+                              const OutlineInputBorder(borderSide: BorderSide(width: 0, color: Colors.white)),
                           filled: true,
-                          fillColor: const Color(0x6645474A)
-                              .withOpacity(0.07999999821186066),
+                          fillColor: const Color(0x6645474A).withOpacity(0.07999999821186066),
                         ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(
-                          top: 30,
-                          bottom: 10,
-                          right:
-                              ((MediaQuery.of(context).size.width) / 2) + 30),
+                      margin:
+                          EdgeInsets.only(top: 30, bottom: 10, right: ((MediaQuery.of(context).size.width) / 2) + 30),
                       child: CustomSmallButton(
                         text: "حذف الحساب",
                         color: const Color(0xFFE13153),
@@ -305,25 +322,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ],
                 ),
               ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomHorizontalDivider(height: 2),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: 330,
-                  bottom: 15,
-                  right: ((MediaQuery.of(context).size.width) / 2) + 30),
-              child: CustomSmallButton(
-                text: "تطبيق",
-                onTap: () {
-                  //TODO commit changes
-                },
-                color: const Color(0xFF213753),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(top: 330, bottom: 15, right: ((MediaQuery.of(context).size.width) / 2) + 30),
+            //   child: CustomSmallButton(
+            //     text: "تطبيق",
+            //     onTap: () {
+            //       //TODO commit changes
+            //     },
+            //     color: const Color(0xFF213753),
+            //   ),
+            // ),
           ],
         ),
       ),

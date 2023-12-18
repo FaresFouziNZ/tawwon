@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomSmallButton extends StatelessWidget {
-  CustomSmallButton({super.key, required this.text, required this.onTap, required this.color});
-  String text;
-  Function onTap;
-  Color color;
+  const CustomSmallButton({super.key, required this.text, required this.onTap, required this.color});
+  final String text;
+  final Function onTap;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {

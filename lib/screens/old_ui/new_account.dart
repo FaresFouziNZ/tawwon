@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motion_toast/resources/extensions.dart';
 import 'client_register_view.dart';
 import 'org_register.dart';
 import 'package:motion_toast/motion_toast.dart';

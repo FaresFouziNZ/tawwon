@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tawwon/screens/new_ui/home_page.dart';
-import 'package:tawwon/widgets/new_ui/custom_small_button.dart';
 import 'package:provider/provider.dart';
-import 'package:tawwon/cloud_functions/Auth.dart';
+import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/local_user.dart';
+import 'package:tawwon/screens/new_ui/page_holder.dart';
+import 'package:tawwon/widgets/new_ui/custom_small_button.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -14,14 +13,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String? _selectedLocation;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
   // Create a reference to the collection where you want to store the data
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -52,35 +49,35 @@ class _SignUpState extends State<SignUp> {
                   //order: _circularBorder(),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              FutureBuilder<Object>(
-                  future: null,
-                  builder: (context, snapshot) {
-                    return DropdownButtonFormField<String>(
-                      iconSize: 0,
-                      decoration: const InputDecoration(
-                        hintText: 'موقعك',
-                        hintTextDirection: TextDirection.rtl,
-                        //border: _circularBorder(),
-                        prefixIcon: Icon(Icons.arrow_drop_down),
-                      ),
-                      value: _selectedLocation,
-                      items: <String>['Location 1', 'Location 2', 'Location 3']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedLocation = value;
-                        });
-                      },
-                    );
-                  }),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // FutureBuilder<Object>(
+              //     future: null,
+              //     builder: (context, snapshot) {
+              //       return DropdownButtonFormField<String>(
+              //         iconSize: 0,
+              //         decoration: const InputDecoration(
+              //           hintText: 'موقعك',
+              //           hintTextDirection: TextDirection.rtl,
+              //           //border: _circularBorder(),
+              //           prefixIcon: Icon(Icons.arrow_drop_down),
+              //         ),
+              //         value: _selectedLocation,
+              //         items: <String>['Location 1', 'Location 2', 'Location 3']
+              //             .map<DropdownMenuItem<String>>((String value) {
+              //           return DropdownMenuItem<String>(
+              //             value: value,
+              //             child: Text(value),
+              //           );
+              //         }).toList(),
+              //         onChanged: (String? value) {
+              //           setState(() {
+              //             _selectedLocation = value;
+              //           });
+              //         },
+              //       );
+              //     }),
               const SizedBox(
                 height: 20,
               ),
@@ -98,8 +95,39 @@ class _SignUpState extends State<SignUp> {
               ),
               CustomSmallButton(
                 text: "التالي",
-                onTap: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                onTap: () async {
+                  final regrex = RegExp(r'05(\d{8})');
+                  if (_nameController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('الرجاء ادخال اسمك'),
+                    ));
+                    return;
+                  }
+                  if (_phoneController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('الرجاء ادخال رقم جوالك'),
+                    ));
+                    return;
+                  }
+                  if (!regrex.hasMatch(_phoneController.text)) {
+                    print(_phoneController.text);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('الرجاء ادخال رقم جوالك بشكل صحيح'),
+                    ));
+                    return;
+                  }
+                  final newUser =
+                      LocalUser(uid: user.uid, number: _phoneController.text, displayName: _nameController.text);
+                  await DatabaseService().updateUser(user: newUser);
+                  if (mounted) {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PageHolder(),
+                        ),
+                      );
+                  }
                 },
                 color: const Color(0xFF213753),
               )

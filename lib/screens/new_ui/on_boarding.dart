@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tawwon/models/favorite_provider.dart';
+import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/new_ui/page_holder.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -12,6 +15,13 @@ class _OnBoardingState extends State<OnBoarding> {
   final controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser?>(context);
+    final favoriteProvider = Provider.of<FavoriteProvider>(context);
+    if (user?.uid != null) {
+      favoriteProvider.uid = user!.uid;
+      favoriteProvider.getFavorite();
+      return const PageHolder();
+    }
     return Scaffold(
       backgroundColor: const Color(0xFF213753),
       body: Directionality(
@@ -57,21 +67,17 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 50), //Probably need fixing
-                  child: Text('مرحبا بك في تطبيق تعاون!',
-                      style: TextStyle(color: Colors.white, fontSize: 24)),
+                  child: Text('مرحبا بك في تطبيق تعاون!', style: TextStyle(color: Colors.white, fontSize: 24)),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 50),
-                  child: Text('اعادة التدوير',
-                      style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
+                  child: Text('اعادة التدوير', style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 50),
                     child: ElevatedButton(
                         onPressed: () {
-                          controller.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.ease);
+                          controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xffffffff),
@@ -133,16 +139,13 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 50),
-                  child: Text('بحيث الكل يستفيد',
-                      style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
+                  child: Text('بحيث الكل يستفيد', style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 50),
                     child: ElevatedButton(
                         onPressed: () {
-                          controller.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.ease);
+                          controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xffffffff),
@@ -203,17 +206,14 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 50),
-                  child: Text('وبس. بكل بساطة',
-                      style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
+                  child: Text('وبس. بكل بساطة', style: TextStyle(fontSize: 18, color: Color(0xff748AA7))),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 50),
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const PageHolder()));
+                              context, MaterialPageRoute(builder: (context) => const PageHolder()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xffffffff),

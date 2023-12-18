@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tawwon/models/local_user.dart';
-import 'package:tawwon/screens/old_ui/orgnaization_view.dart';
-import 'package:tawwon/screens/old_ui/requests_view.dart';
-import 'package:tawwon/screens/old_ui/select_organization_view.dart';
+
+
 
 import '../../cloud_functions/Auth.dart';
 
@@ -12,8 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<LocalUser?>(context);
-    final auth = Auth();
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 218, 229, 234),
       appBar: AppBar(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/screens/old_ui/create_organization_page2.dart';
 import 'package:tawwon/screens/old_ui/homePage.dart';
 
 class CreateOrganizationPageView1 extends StatelessWidget {

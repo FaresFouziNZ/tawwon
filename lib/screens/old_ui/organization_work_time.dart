@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/screens/old_ui/choose_type.dart';
-import 'package:tawwon/screens/old_ui/organization_accepted_donations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SelectWorkHoursView extends StatefulWidget {
   const SelectWorkHoursView({super.key, required this.newOrganization});
@@ -90,7 +88,7 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
             ),
             // To display the start time
             Text(
-              startTime == null ? 'Select start time' : ' ${startTime.format(context)}',
+              ' ${startTime.format(context)}',
               style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
             // To show the time picker for start time
@@ -112,7 +110,7 @@ class _SelectWorkHoursViewState extends State<SelectWorkHoursView> {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             Text(
-              endTime == null ? 'Select end time' : ' ${endTime.format(context)}',
+              ' ${endTime.format(context)}',
               style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
             // To show the time picker for end time

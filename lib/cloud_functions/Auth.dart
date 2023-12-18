@@ -55,6 +55,15 @@ class Auth {
     }
   }
 
+  Future changeEmail(String newEmail) async {
+    try {
+      await _auth.currentUser!.updateEmail(newEmail);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   String uid() {
     return _auth.currentUser!.uid;
   }

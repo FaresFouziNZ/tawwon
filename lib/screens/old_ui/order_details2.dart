@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tawwon/cloud_functions/database.dart';
 import 'package:tawwon/models/request.dart';
 
 class OrderSummary extends StatelessWidget {

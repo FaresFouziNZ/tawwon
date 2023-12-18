@@ -17,6 +17,7 @@ class PageHolder extends StatefulWidget {
 class _PageHolderState extends State<PageHolder> {
   int _currentIndex = 3;
   final controller = PageController(initialPage: 3);
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LocalUser?>(context);
@@ -28,9 +29,7 @@ class _PageHolderState extends State<PageHolder> {
         children: [
           user?.uid == null ? const ProfilePageNotRegistered() : const ProfilePageRegistered(),
           const FavoritePage(),
-          const SearchPage(
-            title: '',
-          ),
+          const SearchPage(),
           const HomePage(),
         ],
       ),
@@ -69,8 +68,6 @@ class _PageHolderState extends State<PageHolder> {
             _currentIndex = index;
             controller.jumpToPage(
               index,
-              // duration: const Duration(milliseconds: 200),
-              // curve: Curves.easeIn,
             );
           });
         },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tawwon/screens/new_ui/login.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'pre_signup.dart';
 import '../../widgets/new_ui/custom_divider_horizontal.dart';
 import '../../widgets/new_ui/custom_small_button.dart';
@@ -62,7 +63,7 @@ class ProfilePageNotRegistered extends StatelessWidget {
                     CustomSmallButton(
                       text: 'تسجيل دخول',
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                       },
                       color: const Color(0xFF213753),
                     )
@@ -74,52 +75,58 @@ class ProfilePageNotRegistered extends StatelessWidget {
               ),
               Column(
                 children: [
-                  ProfilePageListTile(
-                    image: 'assets/images/location.png',
-                    title: 'الموقع المفضل',
-                    onTap: () {},
-                  ),
-                  CustomHorizontalDivider(
-                    height: 1,
-                  ),
-                  ProfilePageListTile(
-                    image: 'assets/images/settings.png',
-                    title: 'إعدادات',
-                    onTap: () {},
-                  ),
-                  CustomHorizontalDivider(
-                    height: 1,
-                  ),
-                  ProfilePageListTile(
-                    image: 'assets/images/language.png',
-                    title: 'لغة',
-                    onTap: () {},
-                  ),
-                  CustomHorizontalDivider(
-                    height: 1,
-                  ),
-                  ProfilePageListTile(
-                    image: 'assets/images/notifications.png',
-                    title: 'الإشعارات',
-                    onTap: () {},
-                  ),
-                  CustomHorizontalDivider(
-                    height: 1,
-                  ),
+                  // ProfilePageListTile(
+                  //   image: 'assets/images/location.png',
+                  //   title: 'الموقع المفضل',
+                  //   onTap: () {},
+                  // ),
+                  // const CustomHorizontalDivider(
+                  //   height: 1,
+                  // ),
+                  // ProfilePageListTile(
+                  //   image: 'assets/images/settings.png',
+                  //   title: 'إعدادات',
+                  //   onTap: () {},
+                  // ),
+                  // const CustomHorizontalDivider(
+                  //   height: 1,
+                  // ),
+                  // ProfilePageListTile(
+                  //   image: 'assets/images/language.png',
+                  //   title: 'لغة',
+                  //   onTap: () {},
+                  // ),
+                  // const CustomHorizontalDivider(
+                  //   height: 1,
+                  // ),
+                  // ProfilePageListTile(
+                  //   image: 'assets/images/notifications.png',
+                  //   title: 'الإشعارات',
+                  //   onTap: () {},
+                  // ),
+                  // const CustomHorizontalDivider(
+                  //   height: 1,
+                  // ),
                   ProfilePageListTile(
                     image: 'assets/images/faq.png',
                     title: 'أشهر الأسئلة',
-                    onTap: () {},
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('قريباً'),
+                      ));
+                    },
                   ),
-                  CustomHorizontalDivider(
+                  const CustomHorizontalDivider(
                     height: 1,
                   ),
                   ProfilePageListTile(
                     image: 'assets/images/contact_us.png',
                     title: 'تواصل معنا',
-                    onTap: () {},
+                    onTap: () {
+                      launchUrl(Uri.parse('https://twitter.com/TKfupm57770'));
+                    },
                   ),
-                  CustomHorizontalDivider(
+                  const CustomHorizontalDivider(
                     height: 1,
                   ),
                 ],

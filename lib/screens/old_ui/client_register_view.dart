@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
-import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/old_ui/welcome.dart';
 
 import 'homePage.dart';
@@ -14,7 +12,6 @@ class ClientRegisterView extends StatelessWidget {
     final email = TextEditingController();
     final password = TextEditingController();
     final passwordConfirm = TextEditingController();
-    final user = Provider.of<LocalUser?>(context);
     final auth = Auth();
     return Scaffold(
       appBar: AppBar(

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
-import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
-import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/screens/old_ui/homePage.dart';
 
 class LoginView extends StatelessWidget {
@@ -14,7 +12,6 @@ class LoginView extends StatelessWidget {
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
     final auth = Auth();
-    final user = Provider.of<LocalUser?>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

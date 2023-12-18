@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
-import 'package:provider/provider.dart';
 import 'package:tawwon/cloud_functions/Auth.dart';
-import 'package:tawwon/models/local_user.dart';
 import 'package:tawwon/models/organization.dart';
 import 'package:tawwon/screens/old_ui/organization_info_desc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrganizationRegister extends StatelessWidget {
   const OrganizationRegister({super.key});
@@ -18,7 +15,6 @@ class OrganizationRegister extends StatelessWidget {
     final email = TextEditingController();
     final password = TextEditingController();
     final auth = Auth();
-    final user = Provider.of<LocalUser>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
